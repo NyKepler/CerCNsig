@@ -1,0 +1,41 @@
+---
+title: "QDNAseq_Exercise"
+author: "Minerva"
+date: "5/27/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+if (!requireNamespace("BiocManager", quietly = TRUE))
+install.packages("BiocManager")
+
+BiocManager::install("QDNAseq")
+
+#Running QDNAseq
+library(QDNAseq)
+
+```
+
+## Adds phenotype data from a file to a QDNAseqReadCounts or a QDNAseqCopyNumbers object.
+
+addPhenodata(object, phenofile) 
+metadata or phenotypical data
+
+```{r cars}
+library(QDNAseq)
+data(LGG150)
+readCounts <- LGG150
+readCounts <- addPhenodata(readCounts, "phenodata.txt")
+```
+
+## Adjusts the filtering on which bins are used.
+
+applyFilters(object, residual=TRUE, blacklist=TRUE, mappability=NA, bases=NA,
+chromosomes=c("X", "Y"), verbose=getOption("QDNAseq::verbose", TRUE))
+
+```{r pressure, echo=FALSE}
+readCountsFiltered <- applyFilters(readCounts)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
