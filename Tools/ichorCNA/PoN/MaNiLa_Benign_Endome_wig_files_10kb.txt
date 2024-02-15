@@ -1,0 +1,5 @@
+/home/minerva/WGS/Data/MaNiLa_CS2/Benign_102/ichorCNA/Benign_102_E_re/CS2_54.10kb.wig
+/home/minerva/WGS/Data/MaNiLa_CS2/Benign_152/ichorCNA/Benign_152_E/CS2_57.10kb.wig
+/home/minerva/WGS/Data/MaNiLa_CS1/Benign_154/ichorCNA/Benign_154_E/CS1_22.10kb.wig
+/home/minerva/WGS/Data/MaNiLa_CS2/Benign_160/ichorCNA/Benign_160_E/CS2_58.10kb.wig
+/home/minerva/WGS/Data/MaNiLa_CS2/Benign_19/ichorCNA/Benign_19_E/CS2_53.10kb.wig

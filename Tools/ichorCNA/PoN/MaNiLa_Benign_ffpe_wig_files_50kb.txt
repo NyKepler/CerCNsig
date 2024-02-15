@@ -1,0 +1,4 @@
+/home/minerva/WGS/Data/MaNiLa_CS1/BRCA_115/ichorCNA/BRCA_115_Ti3/CS1_34.50kb.wig
+/home/minerva/WGS/Data/MaNiLa_CS2/BRCA_123/ichorCNA/BRCA_123_Ti3/CS2_111.50kb.wig
+/home/minerva/WGS/Data/MaNiLa_CS2/BRCA_165/ichorCNA/BRCA_165_Ti3/CS2_112.50kb.wig
+/home/minerva/WGS/Data/MaNiLa_CS2/BRCA_168/ichorCNA/BRCA_168_Ti2/CS2_77.50kb.wig
