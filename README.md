@@ -365,7 +365,7 @@ data, including pat_124 tissue which has aberration on the entire
 chromosome 12. I have to address that the pipeline seems not using PoN
 when there is normal reference available.
 
-# create PoN in R
+# Create PoN in R
 outfile=MaNiLa_Benign_"$type"_PoN_"$bin"kb
 pkg=/home/minerva/miniconda3/envs/R/share/r-ichorcna-0.3.2-1
 
