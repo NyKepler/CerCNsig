@@ -95,7 +95,7 @@ original 50bp single end. A new control set with 58 human genomes is
 obtained from the 1000 Genomes Project Phase 3 using the following
 filters:
 
-# keep cases that are on Illumina platform, low coverage, not withdrawn and paired-end sequenced in a single lane.
+Keep cases that are on Illumina platform, low coverage, not withdrawn and paired-end sequenced in a single lane.
 g1k <- g1k[g1k$INSTRUMENT_PLATFORM == "ILLUMINA", ]
 g1k <- g1k[g1k$INSTRUMENT_MODEL == "Illumina HiSeq 2000", ]
 g1k <- g1k[g1k$ANALYSIS_GROUP == "low coverage", ]
@@ -576,11 +576,62 @@ a large bin level, resulting in its high sensitivity of detection for
 small CNVs. Those inital bins will be used to calculate the Bayesian
 information criterion in the segmentation steg.
 
+```{bash BICseq2-norm}
+## Options:
+  # --help
+  # -l=<int>: read length
+  # -s=<int>: fragment size
+  # -p=<float>: a subsample percentage: default 0.0002.
+  # -b=<int>: bin the expected and observed as <int> bp bins; Default 100.
+  # --gc_bin: if specified, report the GC-content in the bins
+  # --NoMapBin: if specified, do NOT bin the reads according to the mappability
+  # --bin_only: only bin the reads without normalization
+  # --fig=<string>: plot the read count VS GC figure in the specified file (in pdf format)
+  # --title=<string>: title of the figure
+  # --tmp=<string>: the tmp directory;
 
+## Default 100bp but according to the latest BICseq2 publication (2016), I normalized data and set the initial bin size as 10 bp for later segmentation as well as the penalty parameter λ was chosen as 1.2. 
+bin=10 
+binsize=$bin"bp"
 
+## Create config file with header and fill in location of each file into config file
+library="library_id"
+config=/path/to/$library.norm-config.$binsize.txt
+printf "chromName\tfaFile\tMapFile\treadPosFile\tbinFileNorm\n" > $config  
 
+for x in {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X,Y,M}
+do 
+chromName=chr$x
+faFile=/path/to/BICseq2/Reference/hg19.chr$x.fa
+MapFile=/path/to/BICseq2/MapFile/hg19.CRC.100mer.chr$x.txt
+readPosFile=/path/to/$library.chr$x.seq 
+binFileNorm=/path/to/$library.chr$x.$binsize.norm.bin
+printf "$chromName\t$faFile\t$MapFile\t$readPosFile\t$binFileNorm\n" >> $config 
 
+echo $x
+done
 
+## Normalizing potential biases in the sequencing data using BICseq2-norm. Fragment size is extracted from 
+BICSEQ_NORM=/path/to/BICseq2/BICseq_Norm/NBICseq-norm.pl
+tmp=/path/to/tmp
+mkdir -p $tmp
+readlen=100
+stats=/path/to/$library.filt.stats.txt
+fragsize=$(awk '/'average:'/ {print int($5);}' $stats)
+out=/path/to/$library.norm.out.$binsize.txt
+
+## Prepare a configuration text file with following headers
+printf "chromName\tfaFile\tMapFile\treadPosFile\tbinFileNorm\n" > $config  
+
+## Generate normalized bin files
+perl $BICSEQ_NORM -b=$bin -l=$readlen -s=$fragsize --gc_bin --NoMapBin --fig=$library --title=$library --tmp=$tmp $config $out
+
+```
+2.  Detecting CNVs based on the normalized data by using BICseq2-seg.
+
+The segmentation can either run on stand-alone tumor sample or together
+with a control sample ex. normal tissue or blood from the same patient.
+Below I demonstrate the process with the control sample.
 
 
 
