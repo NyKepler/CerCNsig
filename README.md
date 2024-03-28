@@ -239,7 +239,8 @@ percentages than 5%.
 Postanalysis based on the chosen fitting (cellularity and ploidy) with
 given standard = 1 is performed to scale bin values and segment values
 to absolute copies using the formula below, and a segment table with
-absolute copy number is generated using postanalysisloop function: $$
+absolute copy number is generated using postanalysisloop function: 
+$$
 copies = ploidy + (signal − standard) \frac{cellularity * ploidy + 2 (1 − cellularity)}{cellularity * standard}
 $$
 
@@ -496,3 +497,91 @@ number of signatures would be 6. A signature number higher than this
 would force the sparseness in the signature by feature matrix (basis) to
 be greater than that which could be obtained by randomly shuffling the
 input matrix.
+
+##### Step 5. Generate the chosen number of signatures with NMF. This is a heavy step and should be run in R instead of markdown mode. The output NMF contains sample by component matrix and component by signature matrix.
+
+##### Step 6: Quantify signatures: Given a sample-by-component matrix this function quantifies signature exposures using the LCD function from the YAPSA package, returning a normalized signature-by-sample matrix. If the component_by_signature matrix is specified then this matrix is used to define the signatures otherwise the signature definitions from the manuscript (feat_sig_mat.rds) are used. Signature exposure matrices were normalised to sum to one and exposures less than 0.01 were considered 0.
+
+#### 7. CNsignature comparison between BRITROC, our HGSC tumor and HGSC VS samples:
+
+I validate the TuCNsig which generated using Brenton's 36 CN_components
+on either HGSOC tumor samples (filtered away samples have zero tumor
+fraction, 14 tumor samples) or HGSOC Cervical samples (VS):
+##### 1.  Generate CNsig from the HGSC tumor samples.
+##### 2.  Generate CNsig from HGSC Cervical samples (VS).
+##### 3.  Reorder component and plot heatmap.
+##### 4.  Compare CNsignature across Britroc, HGSC tumor and HGSC VS.
+##### 5.  Compare CNsig component weights: one histogram for each signature, containing the relative weighting of each of the components, colour coded by the feature distribution they come from.
+##### 6.  Underlying Feature distributions of different sample sets.
+##### 7.  Mixture model
+##### 8.  CN Component means and standard deviations.
+##### 10. Normalized signature exposure across cohorts
+Here we compare the average exposure of each signature from different data sets or cohorts. 
+
+#### 8. CerCNsig_all validation and comparison
+
+Next we will perform similar validation for the CerCNsig. The CerCNsig version 1 using all HGSC VS samples to extract the components (32) and signatures (6).
+
+##### 1.  Generate CerCNsig_all from the HGSC tumor samples.
+##### 2.  Generate CerCNsig from HGSC tumor samples contains TF.
+##### 3.  Generate CerCNsig from BritROC hq samples.
+##### 4.  Reorder component and plot heatmap.
+##### 5.  Compare CerCNsig_all across Britroc, HGSC tumor and HGSC VS
+##### 6.  Compare CerCNsig_all component weights: one histogram for each signature, containing the relative weighting of each of the components, colour coded by the feature distribution they come from.
+##### 7.  Compare CerCNsig_all to the CNsig
+##### 8.  Underlying Feature distributions of different sample sets
+##### 9.  Mixture model for CerCNsig_all
+##### 10. VS-CN Component means and standard deviations
+##### 11. Normalized signature exposure across cohorts
+
+#### 9. CerCNsig_filt validation and comparison
+##### 1.  Generate CerCNsig_filt from the HGSC tumor samples.
+##### 2.  Generate CerCNsig from HGSC tumor samples contains TF.
+##### 3.  Generate CerCNsig from BritROC hq samples.
+##### 4.  Reorder component and plot heatmap.
+##### 5.  Compare CerCNsig_filt across Britroc, HGSC tumor and HGSC VS.
+##### 6.  Assign signatures to remaining VS.
+##### 7.  Compare CerCNsig_filt component weights: one histogram for each signature, containing the relative weighting of each of the components, colour coded by the feature distribution they come from.
+##### 8.  Compare CerCNsig_filt to the CerCNsig_All. 27 common features.
+##### 9.  Underlying Feature distributions of different sample sets.
+##### 10. Mixture model for CerCNsig_filt.
+##### 11. CN Component means and standard deviations.
+##### 12. Normalized signature exposure across cohorts
+
+#### 10. Assign CerCNsig on Benigh or BRCA VS samples.
+
+#### 11. BICseq2 copy number analysis: most accurate annotation and
+
+*BICseq2* is an algorithm developed for the normalization of
+high-throughput sequencing (HTS) data and detect copy number variations
+(CNV) in the genome. BICseq2 can be used for detecting CNVs with or
+without a control genome. There are two main components in the
+algorithm:
+
+##### 1. Normalizing potential biases in the sequencing data using BICseq2-norm function.
+
+According to the BICseq2 requirements, I adjusted the *BWA* alignment
+setting and *samtools* view function in a slightly different way in
+order to filter out unique mapped read pairs with read length not
+smaller than 100bp. *samtools* stats function provides the estimated
+fragment size for later normalization.
+
+The .seq files of each sample were then process by BICseq2-norm.pl to
+remove the GC and mappability biases in the reads, and converted into
+.txt files which contain 'obs' observed and 'expected' number of reads,
+'var' variance and 'gc' GC percentage in every initial 10 bp bins along
+each chromosome. Unlike other algorithms, BIC-seq2 performs
+normalization at a nucleotide level (every 10 base-pairs) rather than at
+a large bin level, resulting in its high sensitivity of detection for
+small CNVs. Those inital bins will be used to calculate the Bayesian
+information criterion in the segmentation steg.
+
+
+
+
+
+
+
+
+
+
