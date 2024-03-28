@@ -166,10 +166,13 @@ accounted for as described above).
 
 $$
 RMSD = \sqrt{\frac{\sum_{n=1}^{N}{(Signal^{expected}-Standard^{observed})}^2}{N}}
-$$ $$
+$$ 
 
+$$
 MAE = \frac{\sum_{n=1}^{N}{|Signal^{expected}-Standard^{observed}|}}{N}
-$$ Additional, optional parameters like "penalty" (0 to 1) and
+$$ 
+
+Additional, optional parameters like "penalty" (0 to 1) and
 "penploidy" (0 to 1) to penalize for fits at low cellularity or ploidies
 different from 2N can be specified by user. Default settings are 0.5 for
 both "penalty" and "penploidy" but I have run some comparison to find
@@ -181,7 +184,9 @@ $$
 
 $$
 error = error * (1 + |ploidy – 2|)^{penploidy}
-$$ Screening for the parameters like penalty, penploidy in the model as
+$$ 
+
+Screening for the parameters like penalty, penploidy in the model as
 well as amount of read and bin sizes (30, 50 and 100kb) on Benign
 patient VS samples to determine false positive limit and on tumor
 samples for false negative cellularity threshold. According to the ACE
