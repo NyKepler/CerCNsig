@@ -23,7 +23,7 @@ cytology (LBC) sample were collected at the surgery and stored at -80°.
 Their archival cytology slides including PapSmear, liquid-based Pap or
 ThinPrep® were retrieved from pathology departments. The second cohort
 contains archival methanol-based ThinPrep® LBC, slides and tumor tissue
-from HGSOC patients diagnosed between 2018-2020. Till now total 209 DNA
+from HGSOC patients diagnosed between 2018-2020. Till now total 320 DNA
 samples have been processed and analysed in which 7 patients are Benign,
 4 BRCA and 19 HGSOC upon that 7 HGSOC are from cohort 2 and rest from
 cohort 1.
@@ -43,6 +43,9 @@ modified QDNAseq, BICseq2 and HMMcopy (prior ichorCNA). Tumor fraction
 (TF) and ploidy is estimated by ACE, ichorCNA or Rascal. Copy number
 signatures are obtained by CNsignatures and focal CNA by GISTIC2. Other
 data analysis and visualization are done in R and RStudio.
+
+<img width="500" alt="image" src="https://github.com/NyKepler/CerCNsig/assets/111468388/4ecd3f0f-4920-4130-aae5-8e6d4fc154b3">
+
 
 ## 4. Data Analysis and Results
 
@@ -95,13 +98,13 @@ original 50bp single end. A new control set with 58 human genomes is
 obtained from the 1000 Genomes Project Phase 3 using the following
 filters:
 
-Keep cases that are on Illumina platform, low coverage, not withdrawn and paired-end sequenced in a single lane.
-g1k <- g1k[g1k$INSTRUMENT_PLATFORM == "ILLUMINA", ]
-g1k <- g1k[g1k$INSTRUMENT_MODEL == "Illumina HiSeq 2000", ]
-g1k <- g1k[g1k$ANALYSIS_GROUP == "low coverage", ]
-g1k <- g1k[g1k$LIBRARY_LAYOUT == "PAIRED", ]
-g1k <- g1k[g1k$WITHDRAWN == 0, ]
-g1k <- g1k[!g1k$PAIRED_FASTQ == "", ]
+Keep cases that are on Illumina platform, low coverage, not withdrawn and paired-end sequenced in a single lane:
+- g1k <- g1k[g1k$INSTRUMENT_PLATFORM == "ILLUMINA", ]
+- g1k <- g1k[g1k$INSTRUMENT_MODEL == "Illumina HiSeq 2000", ]
+- g1k <- g1k[g1k$ANALYSIS_GROUP == "low coverage", ]
+- g1k <- g1k[g1k$LIBRARY_LAYOUT == "PAIRED", ]
+- g1k <- g1k[g1k$WITHDRAWN == 0, ]
+- g1k <- g1k[!g1k$PAIRED_FASTQ == "", ]
 
 The reference genome was downloaded from the 1000 Genomes project and
 indexed by BWA as to be used in the BWA alignment of the control
@@ -151,9 +154,8 @@ between 1 and 12 as below:
 
 $$
 Signal^{expected}=Standard^{observed}*\frac{cellularity*copies+2*(1-cellularity)}{cellularity*ploidy+2*(1-cellularity)}
-$$ The "standard" is the median segment value of all bins as mentioned
-
-before and ploidy is the general ploidy of the aberrant cells.
+$$ 
+The "standard" is the median segment value of all bins as mentioned before and ploidy is the general ploidy of the aberrant cells.
 
 The difference between the segment value and the closest expected signal
 is the "error" of the segment. The default setting calculates the error
