@@ -79,7 +79,7 @@ $$
 C=\frac{L*N}{G}
 $$
 
-#### 2. QDNAseq Copy Number Analysis
+#### 2. QDNAseq Copy Number Analysis [Tools/QDNAseq](https://github.com/NyKepler/CerCNsig/tree/main/Tools/QDNAseq)
 
 Description from the Bioconductor package "QDNAseq" developed by Ilari
 Scheinin and others (1): Quantitative DNA sequencing for chromosomal
@@ -126,7 +126,7 @@ differences on sequencing read length (2x100 vs 50bp) and depth (\~2 vs
 \~0.1X) of the two control datasets. Note, this should not be run in
 markdown mode due to heavy computation.
 
-#### 3. ACE absolute copy number analysis: Ploidy and cellularity estimation as well as absolute copy number fitting on QDNAseq segmented relative copy number data.
+#### 3. ACE absolute copy number analysis: Ploidy and cellularity estimation as well as absolute copy number fitting on QDNAseq segmented relative copy number data. [Tools/ACE](https://github.com/NyKepler/CerCNsig/tree/main/Tools/ACE)
 
 Absolute copy number estimation (ACE) scales relative copy number
 signals from chromosomal segments to optimally fit absolute copy
@@ -261,7 +261,8 @@ AKT2 and deletion in TP53 are more frequent in early stage HGSC, while
 amplifiation in PTEN and KRAS are more seen in later stage. More detail
 focal CNA analysis will be done by GISTIC2.
 
-#### 4. Rascal absolute copy number analysis: Benchmark with ACE shows super for HGSC tumor samples but not ideal for cytology VS.
+#### 4. Rascal absolute copy number analysis: Benchmark with ACE shows super for HGSC tumor samples but not ideal for cytology VS. [Tools/Rascal](https://github.com/NyKepler/CerCNsig/tree/main/Tools/Rascal)
+
 
 *Rascal* was developed based on concepts of ACE and further adapted to
 the biological nature of ovarian tumor samples. The mathematics of this
@@ -335,7 +336,7 @@ the observed is bigger than 0.3 it means rascal failed to find a matched
 solution, and if observed TP53 MAF is not available or below 0.3 (low
 cellularity/purity) the fitting solutions should be manually inspected.
 
-#### 5. ichorCNA copy number analysis: what is the limit detect tumor fraction in WGS data.
+#### 5. ichorCNA copy number analysis: what is the limit detect tumor fraction in WGS data. [Tools/ichorCNA](https://github.com/NyKepler/CerCNsig/tree/main/Tools/ichorCNA)
 
 *ichorCNA* was originally designed for estimating circulating tumor DNA
 in the plasma using ultra-low-pass whole genome sequencing (0.1x
@@ -432,7 +433,7 @@ of parameters is recommended.
 
 The final estimation is revised manually that the tumor samples results are based on Squaremodel or Rascal while the rest are mostly based on ichorCNA with 0.03 as threshold meaning anything below that will be called 0 cellularity and normal diploidy.
 
-#### 6. CNsigntures Analysis: whole genome copy number signature analysis to extract HGSC related signatures from pre-diagnotic/pre-sytompatic cytology samples.
+#### 6. CNsigntures Analysis: whole genome copy number signature analysis to extract HGSC related signatures from pre-diagnotic/pre-sytompatic cytology samples. [Tools/CNsignatures](https://github.com/NyKepler/CerCNsig/tree/main/Tools/CNsignatures)
 
 According to *CNsigntures* the analysis just require a list of absolute
 segmented copy number tables which contains "chromosome", "start",
@@ -514,46 +515,36 @@ input matrix.
 I validate the TuCNsig which generated using Brenton's 36 CN_components
 on either HGSC tumor samples (filtered away samples have zero tumor
 fraction, 14 tumor samples) or HGSC Cervical samples (VS):
-    1.  Generate CNsig from the HGSC tumor samples.
-    2.  Generate CNsig from HGSC Cervical samples (VS).
-    3.  Reorder component and plot heatmap.
-    4.  Compare CNsignature across Britroc, HGSC tumor and HGSC VS.
-    5.  Compare CNsig component weights: one histogram for each signature, containing the relative weighting of each of the components, colour coded by the feature distribution they come from.
-    6.  Underlying Feature distributions of different sample sets.
-    7.  Mixture model
-    8.  CN Component means and standard deviations.
-    10. Normalized signature exposure across cohorts
+-    1.  Generate CNsig from the HGSC tumor samples.
+-    2.  Generate CNsig from HGSC Cervical samples (VS).
+-    3.  Reorder component and plot heatmap.
+-    4.  Compare CNsignature across Britroc, HGSC tumor and HGSC VS.
+-    5.  Compare CNsig component weights: one histogram for each signature, containing the relative weighting of each of the components, colour coded by the feature distribution they come from.
+-    6.  Underlying Feature distributions of different sample sets.
+-    7.  Mixture model
+-    8.  CN Component means and standard deviations.
+-    10. Normalized signature exposure across cohorts
 Here we compare the average exposure of each signature from different data sets or cohorts. 
 
 #### 8. CerCNsig_all validation and comparison Version 1
 
 Next we will perform similar validation for the CerCNsig. The CerCNsig version 1 using all HGSC VS samples to extract the components (32) and signatures (6).
 
-##### 1.  Generate CerCNsig_all from the HGSC tumor samples.
-##### 2.  Generate CerCNsig from HGSC tumor samples contains TF.
-##### 3.  Generate CerCNsig from BritROC hq samples.
-##### 4.  Reorder component and plot heatmap.
-##### 5.  Compare CerCNsig_all across Britroc, HGSC tumor and HGSC VS
-##### 6.  Compare CerCNsig_all component weights: one histogram for each signature, containing the relative weighting of each of the components, colour coded by the feature distribution they come from.
-##### 7.  Compare CerCNsig_all to the CNsig
-##### 8.  Underlying Feature distributions of different sample sets
-##### 9.  Mixture model for CerCNsig_all
-##### 10. VS-CN Component means and standard deviations
-##### 11. Normalized signature exposure across cohorts
+-    1.  Generate CerCNsig_all from the HGSC tumor samples.
+-    2.  Generate CerCNsig from HGSC tumor samples contains TF.
+-    3.  Generate CerCNsig from BritROC hq samples.
+-    4.  Reorder component and plot heatmap.
+-    5.  Compare CerCNsig_all across Britroc, HGSC tumor and HGSC VS
+-    6.  Compare CerCNsig_all component weights: one histogram for each signature, containing the relative weighting of each of the components, colour coded by the feature distribution they come from.
+-    7.  Compare CerCNsig_all to the CNsig
+-    8.  Underlying Feature distributions of different sample sets
+-    9.  Mixture model for CerCNsig_all
+-    10. VS-CN Component means and standard deviations
+-    11. Normalized signature exposure across cohorts
 
-#### 9. CerCNsig_filt validation and comparison Version 1
-##### 1.  Generate CerCNsig_filt from the HGSC tumor samples.
-##### 2.  Generate CerCNsig from HGSC tumor samples contains TF.
-##### 3.  Generate CerCNsig from BritROC hq samples.
-##### 4.  Reorder component and plot heatmap.
-##### 5.  Compare CerCNsig_filt across Britroc, HGSC tumor and HGSC VS.
-##### 6.  Assign signatures to remaining VS.
-##### 7.  Compare CerCNsig_filt component weights: one histogram for each signature, containing the relative weighting of each of the components, colour coded by the feature distribution they come from.
-##### 8.  Compare CerCNsig_filt to the CerCNsig_All. 27 common features.
-##### 9.  Underlying Feature distributions of different sample sets.
-##### 10. Mixture model for CerCNsig_filt.
-##### 11. CN Component means and standard deviations.
-##### 12. Normalized signature exposure across cohorts
+#### 9. CerCNsig_filt validation and comparison Latest Version 2024 (ongoing)
+The CerCNsig_filt version 2024 based on the absolution copy number profiles of HGSC Cervical samples generated from the https://github.com/IngridHLab/BINP52_CNA_Framework pipeline. Cervical samples were selected based on their HGSC CN signatures in Macintyre et al. 2018 https://github.com/markowetzlab/CNsignatures: samples with similiarity more than the first three signatures (S1-S3). Those cervical samples were considered to be CNA enriched instead of filtering the cervical samples using the cellularity from ACE/Rascal/ichorCNA estimation and mauanlly inspection which could be not completely accurate.
+-    1. Filter     
 
 #### 10. Assign CerCNsig on Benigh or BRCA VS samples.
 
@@ -565,7 +556,7 @@ high-throughput sequencing (HTS) data and detect copy number variations
 without a control genome. There are two main components in the
 algorithm:
 
-##### 1. Normalizing potential biases in the sequencing data using BICseq2-norm function.
+##### 1. Normalizing potential biases in the sequencing data using BICseq2-norm function. [Tools/BICseq2](https://github.com/NyKepler/CerCNsig/tree/main/Tools/BICseq2)
 
 According to the BICseq2 requirements, I adjusted the *BWA* alignment
 setting and *samtools* view function in a slightly different way in
