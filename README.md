@@ -194,7 +194,7 @@ $$
 
 Screening for the parameters like penalty, penploidy in the model as
 well as amount of read and bin sizes (30, 50 and 100kb) on Benign
-patient VS samples to determine false positive limit and on tumor
+patient Cervical samples to determine false positive limit and on tumor
 samples for false negative cellularity threshold. According to the ACE
 article, false positive results are highly unlikely using a penalty
 factor of 0.1 on high quality, fresh, healthy control DNA sample.
@@ -218,7 +218,7 @@ with cellularity equal to 1 was considered as 'negative call' and saved
 for the analysis below.
 
 The optimization has been run on 6 sample types blood, plasma, tissue,
-endome, MaNiLa VS and archival VS which indicate different coverage
+endome, MaNiLa Cervical and archival Cervical which indicate different coverage
 depths and , 3 bin sizes during QDNAseq read counting and 2 distance
 error methods in ACE. This have been run in two slightly different
 versions as mentioned in the code above: version 1 is has been used for
@@ -266,7 +266,7 @@ amplifiation in PTEN and KRAS are more seen in later stage. More detail
 focal CNA analysis will be done by GISTIC2.
 
 #### 4. [Rascal](https://github.com/NyKepler/CerCNsig/tree/main/Tools/Rascal) absolute copy number analysis: 
--    Benchmark with ACE shows super for HGSC tumor samples but not ideal for cytology VS. 
+-    Benchmark with ACE shows super for HGSC tumor samples but not ideal for cytology Cervical. 
 
 *Rascal* was developed based on concepts of ACE and further adapted to
 the biological nature of ovarian tumor samples. The mathematics of this
@@ -463,7 +463,7 @@ profile that was used in all downstream analyses.
 Maybe I have spent too much an effort on the ACN estimation by trying
 different tools and optimizing their performance, but combining the
 results from ACE, Rascal and ichorCNA we should have a better estimation
-of ACN profile on our low purity MaNiLa VS and archival VS samples and
+of ACN profile on our low purity MaNiLa Cervical and archival Cervical samples and
 be able to select the ones with true signal.
 
 To better understand the principle and workflow of the *CNsignature* and
@@ -515,7 +515,7 @@ input matrix.
 
     Step 6: Quantify signatures: Given a sample-by-component matrix this function quantifies signature exposures using the LCD function from the YAPSA package, returning a normalized signature-by-sample matrix. If the component_by_signature matrix is specified then this matrix is used to define the signatures otherwise the signature definitions from the manuscript (feat_sig_mat.rds) are used. Signature exposure matrices were normalised to sum to one and exposures less than 0.01 were considered 0.
 
-#### 7. CNsignature comparison between BRITROC, our HGSC tumor and HGSC VS samples:
+#### 7. CNsignature comparison between BRITROC, our HGSC tumor and HGSC Cervical samples:
 
 I validate the TuCNsig which generated using Brenton's 36 CN_components
 on either HGSC tumor samples (filtered away samples have zero tumor
@@ -524,7 +524,7 @@ fraction, 14 tumor samples) or HGSC Cervical samples (VS):
 	1.  Generate CNsig from the HGSC tumor samples.
 	2.  Generate CNsig from HGSC Cervical samples (VS).
 	3.  Reorder component and plot heatmap.
-	4.  Compare CNsignature across Britroc, HGSC tumor and HGSC VS.
+	4.  Compare CNsignature across Britroc, HGSC tumor and HGSC Cervical.
 	5.  Compare CNsig component weights: one histogram for each signature, containing the relative weighting of each of the components, colour coded by the feature distribution they come from.
 	6.  Underlying Feature distributions of different sample sets.
 	7.  Mixture model
@@ -534,13 +534,13 @@ Here we compare the average exposure of each signature from different data sets 
 
 #### 8. [CerCNsig_all](https://github.com/NyKepler/CerCNsig/tree/main/Tools/CNsignatures/Archived) validation and comparison Version 1
 
-Next we will perform similar validation for the CerCNsig. The CerCNsig version 1 using all HGSC VS samples to extract the components (32) and signatures (6).
+Next we will perform similar validation for the CerCNsig. The CerCNsig version 1 using all HGSC Cervical samples to extract the components (32) and signatures (6).
 	
  	1.  Generate CerCNsig_all from the HGSC tumor samples.
 	2.  Generate CerCNsig from HGSC tumor samples contains TF.
 	3.  Generate CerCNsig from BritROC hq samples.
 	4.  Reorder component and plot heatmap.
-	5.  Compare CerCNsig_all across Britroc, HGSC tumor and HGSC VS
+	5.  Compare CerCNsig_all across Britroc, HGSC tumor and HGSC Cervical
 	6.  Compare CerCNsig_all component weights: one histogram for each signature, containing the relative weighting of each of the components, colour coded by the feature distribution they come from.
 	7.  Compare CerCNsig_all to the CNsig
 	8.  Underlying Feature distributions of different sample sets
@@ -553,7 +553,7 @@ The CerCNsig_filt version 2024 based on the absolution copy number profiles of H
 	
  	1. Filter     
 
-#### 10. Assign CerCNsig on Benigh or BRCA VS samples.
+#### 10. Assign CerCNsig on Benigh or BRCA Cervical samples.
 
 #### 11. [Tools/BICseq2](https://github.com/NyKepler/CerCNsig/tree/main/Tools/BICseq2) copy number analysis: 
 -    Most accurate annotation and copy number calling.
