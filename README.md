@@ -367,7 +367,7 @@ data, including pat_124 tissue which has aberration on the entire
 chromosome 12. I have to address that the pipeline seems not using PoN
 when there is normal reference available.
 
-### Create PoN in R
+#### Create PoN in R
 outfile=MaNiLa_Benign_"$type"_PoN_"$bin"kb
 pkg=/home/minerva/miniconda3/envs/R/share/r-ichorcna-0.3.2-1
 
@@ -514,7 +514,7 @@ input matrix.
 I validate the TuCNsig which generated using Brenton's 36 CN_components
 on either HGSC tumor samples (filtered away samples have zero tumor
 fraction, 14 tumor samples) or HGSC Cervical samples (VS):
-    1.  Generate CNsig from the HGSC tumor samples.
+- 1.  Generate CNsig from the HGSC tumor samples.
     2.  Generate CNsig from HGSC Cervical samples (VS).
     3.  Reorder component and plot heatmap.
     4.  Compare CNsignature across Britroc, HGSC tumor and HGSC VS.
