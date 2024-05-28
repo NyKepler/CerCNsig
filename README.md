@@ -517,32 +517,33 @@ input matrix.
 I validate the TuCNsig which generated using Brenton's 36 CN_components
 on either HGSC tumor samples (filtered away samples have zero tumor
 fraction, 14 tumor samples) or HGSC Cervical samples (VS):
--    1.  Generate CNsig from the HGSC tumor samples.
--    2.  Generate CNsig from HGSC Cervical samples (VS).
--    3.  Reorder component and plot heatmap.
--    4.  Compare CNsignature across Britroc, HGSC tumor and HGSC VS.
--    5.  Compare CNsig component weights: one histogram for each signature, containing the relative weighting of each of the components, colour coded by the feature distribution they come from.
--    6.  Underlying Feature distributions of different sample sets.
--    7.  Mixture model
--    8.  CN Component means and standard deviations.
--    10. Normalized signature exposure across cohorts
+
+	1.  Generate CNsig from the HGSC tumor samples.
+	2.  Generate CNsig from HGSC Cervical samples (VS).
+	3.  Reorder component and plot heatmap.
+	4.  Compare CNsignature across Britroc, HGSC tumor and HGSC VS.
+	5.  Compare CNsig component weights: one histogram for each signature, containing the relative weighting of each of the components, colour coded by the feature distribution they come from.
+	6.  Underlying Feature distributions of different sample sets.
+	7.  Mixture model
+	8.  CN Component means and standard deviations.
+	10. Normalized signature exposure across cohorts
 Here we compare the average exposure of each signature from different data sets or cohorts. 
 
 #### 8. [CerCNsig_all](https://github.com/NyKepler/CerCNsig/tree/main/Tools/CNsignatures/Archived) validation and comparison Version 1
 
 Next we will perform similar validation for the CerCNsig. The CerCNsig version 1 using all HGSC VS samples to extract the components (32) and signatures (6).
-
-    -    1.  Generate CerCNsig_all from the HGSC tumor samples.
-    -    2.  Generate CerCNsig from HGSC tumor samples contains TF.
-    -    3.  Generate CerCNsig from BritROC hq samples.
-    -    4.  Reorder component and plot heatmap.
-    -    5.  Compare CerCNsig_all across Britroc, HGSC tumor and HGSC VS
-    -    6.  Compare CerCNsig_all component weights: one histogram for each signature, containing the relative weighting of each of the components, colour coded by the feature distribution they come from.
-    -    7.  Compare CerCNsig_all to the CNsig
-    -    8.  Underlying Feature distributions of different sample sets
-    -    9.  Mixture model for CerCNsig_all
-    -    10. VS-CN Component means and standard deviations
-    -    11. Normalized signature exposure across cohorts
+	
+ 	1.  Generate CerCNsig_all from the HGSC tumor samples.
+	2.  Generate CerCNsig from HGSC tumor samples contains TF.
+	3.  Generate CerCNsig from BritROC hq samples.
+	4.  Reorder component and plot heatmap.
+	5.  Compare CerCNsig_all across Britroc, HGSC tumor and HGSC VS
+	6.  Compare CerCNsig_all component weights: one histogram for each signature, containing the relative weighting of each of the components, colour coded by the feature distribution they come from.
+	7.  Compare CerCNsig_all to the CNsig
+	8.  Underlying Feature distributions of different sample sets
+	9.  Mixture model for CerCNsig_all
+	10. VS-CN Component means and standard deviations
+	11. Normalized signature exposure across cohorts
 
 #### 9. [CerCNsig_filt](https://github.com/NyKepler/CerCNsig/tree/main/Tools/CNsignatures) validation and comparison Latest Version 2024 (ongoing)
 The CerCNsig_filt version 2024 based on the absolution copy number profiles of HGSC Cervical samples generated from the https://github.com/IngridHLab/BINP52_CNA_Framework pipeline. Cervical samples were selected based on their HGSC CN signatures in Macintyre et al. 2018 https://github.com/markowetzlab/CNsignatures: samples with similiarity more than the first three signatures (S1-S3). Those cervical samples were considered to be CNA enriched instead of filtering the cervical samples using the cellularity from ACE/Rascal/ichorCNA estimation and mauanlly inspection which could be not completely accurate.
@@ -585,17 +586,17 @@ information criterion in the segmentation steg.
 
 ```{bash BICseq2-norm}
 ## Options:
-  # --help
-  # -l=<int>: read length
-  # -s=<int>: fragment size
-  # -p=<float>: a subsample percentage: default 0.0002.
-  # -b=<int>: bin the expected and observed as <int> bp bins; Default 100.
-  # --gc_bin: if specified, report the GC-content in the bins
-  # --NoMapBin: if specified, do NOT bin the reads according to the mappability
-  # --bin_only: only bin the reads without normalization
-  # --fig=<string>: plot the read count VS GC figure in the specified file (in pdf format)
-  # --title=<string>: title of the figure
-  # --tmp=<string>: the tmp directory;
+  	# --help
+  	# -l=<int>: read length
+  	# -s=<int>: fragment size
+  	# -p=<float>: a subsample percentage: default 0.0002.
+  	# -b=<int>: bin the expected and observed as <int> bp bins; Default 100.
+  	# --gc_bin: if specified, report the GC-content in the bins
+  	# --NoMapBin: if specified, do NOT bin the reads according to the mappability
+  	# --bin_only: only bin the reads without normalization
+	# --fig=<string>: plot the read count VS GC figure in the specified file (in pdf format)
+  	# --title=<string>: title of the figure
+  	# --tmp=<string>: the tmp directory;
 
 ## Generate normalized bin files
 perl $BICSEQ_NORM -b=$bin -l=$readlen -s=$fragsize --gc_bin --NoMapBin --fig=$library --title=$library --tmp=$tmp $config $out
@@ -608,17 +609,17 @@ Below I demonstrate the process with the control sample.
 
 ```{bash BICseq2-Segment}
 ## Options:
-  	#--lambda=<float>: the (positive) penalty used for BICseq2
+	#--lambda=<float>: the (positive) penalty used for BICseq2
 	#--tmp=<string>: the tmp directory
-    #--help: print this message
-    #--fig=<string>: plot the CNV profile in a png file
-    #--title=<string>: the title of the figure
-    #--nrm: do not remove likely germline CNVs (with a matched normal) or segments with bad mappability (without a matched normal)
-    #--bootstrap: perform bootstrap test to assign confidence (only for one sample case)
-    #--noscale: do not automatically adjust the lambda parameter according to the noise level in the data
-    #--strict: if specified, use a more stringent method to ajust the lambda parameter
-    #--control: the data has a control genome
-    #--detail: if specified, print the detailed segmentation result (for multiSample only)
+	#--help: print this message
+    	#--fig=<string>: plot the CNV profile in a png file
+    	#--title=<string>: the title of the figure
+    	#--nrm: do not remove likely germline CNVs (with a matched normal) or segments with bad mappability (without a matched normal)
+    	#--bootstrap: perform bootstrap test to assign confidence (only for one sample case)
+    	#--noscale: do not automatically adjust the lambda parameter according to the noise level in the data
+    	#--strict: if specified, use a more stringent method to ajust the lambda parameter
+    	#--control: the data has a control genome
+    	#--detail: if specified, print the detailed segmentation result (for multiSample only)
 
 ## For stand-alone sample without control!!
 perl $BICSEQ_SEG --tmp=$tmp --lambda=$lambda --detail --bootstrap --fig=$png --title=$library.$binsize.$lambda $config $out 
