@@ -72,13 +72,14 @@ In the cohort study we got 23-101 mrp with 22-78% duplication and 13-69
 mrp after deduplication. The coverage is 0.4-2.2X. The coverage is
 calculated based on the formula below:
 
-• G is the haploid genome length, 3.2\^ • L is the read length, ex.
-100bp • N is the number of reads, 30M • C stands for coverage, be
-roughly 1X
-
 $$
 C=\frac{L*N}{G}
 $$
+
+-	G is the haploid genome length, 3.2\^
+-	L is the read length, ex. 100bp
+-	N is the number of reads, 30M
+-	C stands for coverage, be roughly 1X
 
 #### 2. [QDNAseq](https://github.com/NyKepler/CerCNsig/tree/main/Tools/QDNAseq) Copy Number Analysis 
 
