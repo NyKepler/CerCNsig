@@ -338,7 +338,7 @@ solution, and if observed TP53 MAF is not available or below 0.3 (low
 cellularity/purity) the fitting solutions should be manually inspected.
 
 #### 5. [ichorCNA](https://github.com/NyKepler/CerCNsig/tree/main/Tools/ichorCNA) copy number analysis: 
--    what is the limit detect tumor fraction in WGS data. 
+-    What is the limit detect tumor fraction in WGS data. 
 
 *ichorCNA* was originally designed for estimating circulating tumor DNA
 in the plasma using ultra-low-pass whole genome sequencing (0.1x
@@ -436,7 +436,7 @@ of parameters is recommended.
 The final estimation is revised manually that the tumor samples results are based on Squaremodel or Rascal while the rest are mostly based on ichorCNA with 0.03 as threshold meaning anything below that will be called 0 cellularity and normal diploidy.
 
 #### 6. Copy Number Signatures Analysis: 
--    whole genome copy number signature analysis to extract HGSC related signatures from pre-diagnotic/pre-sytompatic cytology samples. 
+-    Whole genome copy number signature analysis to extract HGSC related signatures from pre-diagnotic/pre-sytompatic cytology samples. 
 
 According to *CNsigntures* the analysis just require a list of absolute
 segmented copy number tables which contains "chromosome", "start",
@@ -529,7 +529,7 @@ fraction, 14 tumor samples) or HGSC Cervical samples (VS):
 -    10. Normalized signature exposure across cohorts
 Here we compare the average exposure of each signature from different data sets or cohorts. 
 
-#### 8. CerCNsig_all validation and comparison Version 1
+#### 8. [CerCNsig_all](https://github.com/NyKepler/CerCNsig/tree/main/Tools/CNsignatures/Archived) validation and comparison Version 1
 
 Next we will perform similar validation for the CerCNsig. The CerCNsig version 1 using all HGSC VS samples to extract the components (32) and signatures (6).
 
@@ -551,7 +551,8 @@ The CerCNsig_filt version 2024 based on the absolution copy number profiles of H
 
 #### 10. Assign CerCNsig on Benigh or BRCA VS samples.
 
-#### 11. BICseq2 copy number analysis: most accurate annotation and
+#### 11. [Tools/BICseq2](https://github.com/NyKepler/CerCNsig/tree/main/Tools/BICseq2) copy number analysis: 
+-    Most accurate annotation and copy number calling.
 
 *BICseq2* is an algorithm developed for the normalization of
 high-throughput sequencing (HTS) data and detect copy number variations
@@ -559,7 +560,8 @@ high-throughput sequencing (HTS) data and detect copy number variations
 without a control genome. There are two main components in the
 algorithm:
 
-##### 1. Normalizing potential biases in the sequencing data using BICseq2-norm function. [Tools/BICseq2](https://github.com/NyKepler/CerCNsig/tree/main/Tools/BICseq2)
+##### 1. Normalizing potential biases in the sequencing data using BICseq2-norm function. 
+
 
 According to the BICseq2 requirements, I adjusted the *BWA* alignment
 setting and *samtools* view function in a slightly different way in
