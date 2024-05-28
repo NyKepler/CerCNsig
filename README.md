@@ -514,7 +514,7 @@ input matrix.
 I validate the TuCNsig which generated using Brenton's 36 CN_components
 on either HGSC tumor samples (filtered away samples have zero tumor
 fraction, 14 tumor samples) or HGSC Cervical samples (VS):
-- 1.  Generate CNsig from the HGSC tumor samples.
+    1.  Generate CNsig from the HGSC tumor samples.
     2.  Generate CNsig from HGSC Cervical samples (VS).
     3.  Reorder component and plot heatmap.
     4.  Compare CNsignature across Britroc, HGSC tumor and HGSC VS.
