@@ -79,7 +79,7 @@ $$
 C=\frac{L*N}{G}
 $$
 
-#### 2. QDNAseq Copy Number Analysis [Tools/QDNAseq](https://github.com/NyKepler/CerCNsig/tree/main/Tools/QDNAseq)
+#### 2. [QDNAseq](https://github.com/NyKepler/CerCNsig/tree/main/Tools/QDNAseq) Copy Number Analysis 
 
 Description from the Bioconductor package "QDNAseq" developed by Ilari
 Scheinin and others (1): Quantitative DNA sequencing for chromosomal
@@ -126,7 +126,8 @@ differences on sequencing read length (2x100 vs 50bp) and depth (\~2 vs
 \~0.1X) of the two control datasets. Note, this should not be run in
 markdown mode due to heavy computation.
 
-#### 3. ACE absolute copy number analysis: Ploidy and cellularity estimation as well as absolute copy number fitting on QDNAseq segmented relative copy number data. [Tools/ACE](https://github.com/NyKepler/CerCNsig/tree/main/Tools/ACE)
+#### 3. [ACE](https://github.com/NyKepler/CerCNsig/tree/main/Tools/ACE) absolute copy number analysis: 
+-    Ploidy and cellularity estimation as well as absolute copy number fitting on QDNAseq segmented relative copy number data. 
 
 Absolute copy number estimation (ACE) scales relative copy number
 signals from chromosomal segments to optimally fit absolute copy
@@ -261,8 +262,8 @@ AKT2 and deletion in TP53 are more frequent in early stage HGSC, while
 amplifiation in PTEN and KRAS are more seen in later stage. More detail
 focal CNA analysis will be done by GISTIC2.
 
-#### 4. Rascal absolute copy number analysis: Benchmark with ACE shows super for HGSC tumor samples but not ideal for cytology VS. [Tools/Rascal](https://github.com/NyKepler/CerCNsig/tree/main/Tools/Rascal)
-
+#### 4. [Rascal](https://github.com/NyKepler/CerCNsig/tree/main/Tools/Rascal) absolute copy number analysis: 
+-    Benchmark with ACE shows super for HGSC tumor samples but not ideal for cytology VS. 
 
 *Rascal* was developed based on concepts of ACE and further adapted to
 the biological nature of ovarian tumor samples. The mathematics of this
@@ -336,7 +337,8 @@ the observed is bigger than 0.3 it means rascal failed to find a matched
 solution, and if observed TP53 MAF is not available or below 0.3 (low
 cellularity/purity) the fitting solutions should be manually inspected.
 
-#### 5. ichorCNA copy number analysis: what is the limit detect tumor fraction in WGS data. [Tools/ichorCNA](https://github.com/NyKepler/CerCNsig/tree/main/Tools/ichorCNA)
+#### 5. [ichorCNA](https://github.com/NyKepler/CerCNsig/tree/main/Tools/ichorCNA) copy number analysis: 
+-    what is the limit detect tumor fraction in WGS data. 
 
 *ichorCNA* was originally designed for estimating circulating tumor DNA
 in the plasma using ultra-low-pass whole genome sequencing (0.1x
@@ -368,7 +370,7 @@ data, including pat_124 tissue which has aberration on the entire
 chromosome 12. I have to address that the pipeline seems not using PoN
 when there is normal reference available.
 
-#### Create PoN in R
+#### Before start: Create PoN in R
 outfile=MaNiLa_Benign_"$type"_PoN_"$bin"kb
 pkg=/home/minerva/miniconda3/envs/R/share/r-ichorcna-0.3.2-1
 
@@ -433,7 +435,8 @@ of parameters is recommended.
 
 The final estimation is revised manually that the tumor samples results are based on Squaremodel or Rascal while the rest are mostly based on ichorCNA with 0.03 as threshold meaning anything below that will be called 0 cellularity and normal diploidy.
 
-#### 6. CNsigntures Analysis: whole genome copy number signature analysis to extract HGSC related signatures from pre-diagnotic/pre-sytompatic cytology samples. [Tools/CNsignatures](https://github.com/NyKepler/CerCNsig/tree/main/Tools/CNsignatures)
+#### 6. Copy Number Signatures Analysis: 
+-    whole genome copy number signature analysis to extract HGSC related signatures from pre-diagnotic/pre-sytompatic cytology samples. 
 
 According to *CNsigntures* the analysis just require a list of absolute
 segmented copy number tables which contains "chromosome", "start",
@@ -466,7 +469,7 @@ to demonstrate each step of the analysis with the codes in
 'main_functions.R' and source the rest from the 'helper_functions.R'
 instead just running the function:
 
-##### Prepare segment tables:
+##### Before start: Prepare segment tables:
 
 The ACE postanalysis provides a segment table with estimated ACN based
 on the ploidy and cellularity fitting, and the column 'Chromosome',
@@ -542,7 +545,7 @@ Next we will perform similar validation for the CerCNsig. The CerCNsig version 1
 -    10. VS-CN Component means and standard deviations
 -    11. Normalized signature exposure across cohorts
 
-#### 9. CerCNsig_filt validation and comparison Latest Version 2024 (ongoing)
+#### 9. [CerCNsig_filt](https://github.com/NyKepler/CerCNsig/tree/main/Tools/CNsignatures) validation and comparison Latest Version 2024 (ongoing)
 The CerCNsig_filt version 2024 based on the absolution copy number profiles of HGSC Cervical samples generated from the https://github.com/IngridHLab/BINP52_CNA_Framework pipeline. Cervical samples were selected based on their HGSC CN signatures in Macintyre et al. 2018 https://github.com/markowetzlab/CNsignatures: samples with similiarity more than the first three signatures (S1-S3). Those cervical samples were considered to be CNA enriched instead of filtering the cervical samples using the cellularity from ACE/Rascal/ichorCNA estimation and mauanlly inspection which could be not completely accurate.
 -    1. Filter     
 
