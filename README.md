@@ -514,15 +514,15 @@ input matrix.
 I validate the TuCNsig which generated using Brenton's 36 CN_components
 on either HGSC tumor samples (filtered away samples have zero tumor
 fraction, 14 tumor samples) or HGSC Cervical samples (VS):
-##### 1.  Generate CNsig from the HGSC tumor samples.
-##### 2.  Generate CNsig from HGSC Cervical samples (VS).
-##### 3.  Reorder component and plot heatmap.
-##### 4.  Compare CNsignature across Britroc, HGSC tumor and HGSC VS.
-##### 5.  Compare CNsig component weights: one histogram for each signature, containing the relative weighting of each of the components, colour coded by the feature distribution they come from.
-##### 6.  Underlying Feature distributions of different sample sets.
-##### 7.  Mixture model
-##### 8.  CN Component means and standard deviations.
-##### 10. Normalized signature exposure across cohorts
+    1.  Generate CNsig from the HGSC tumor samples.
+    2.  Generate CNsig from HGSC Cervical samples (VS).
+    3.  Reorder component and plot heatmap.
+    4.  Compare CNsignature across Britroc, HGSC tumor and HGSC VS.
+    5.  Compare CNsig component weights: one histogram for each signature, containing the relative weighting of each of the components, colour coded by the feature distribution they come from.
+    6.  Underlying Feature distributions of different sample sets.
+    7.  Mixture model
+    8.  CN Component means and standard deviations.
+    10. Normalized signature exposure across cohorts
 Here we compare the average exposure of each signature from different data sets or cohorts. 
 
 #### 8. CerCNsig_all validation and comparison Version 1
