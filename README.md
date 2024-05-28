@@ -1,5 +1,6 @@
 # CerCNsig
 Generation of Copy Number Signatures for Cervical Samples from High Grade Serous Carcinoma Patients
+
 ## 1. Introduction
 
 Ovarian cancer is a heterogeneous disease consisting of different
@@ -319,7 +320,7 @@ not at 100kb, however one can use the value from a much wider segment if
 100kb is prefered. The analysis I demonstrate below is performed on the
 30kb segmented data.
 
---min-ploidy=1.8 The minimum ploidy to consider (default: 1.25)
+    --min-ploidy=1.8 The minimum ploidy to consider (default: 1.25)
 
     --max-ploidy=4.3
         The maximum ploidy to consider (default: 5.25)
@@ -549,7 +550,8 @@ Next we will perform similar validation for the CerCNsig. The CerCNsig version 1
 
 #### 9. [CerCNsig_filt](https://github.com/NyKepler/CerCNsig/tree/main/Tools/CNsignatures) validation and comparison Latest Version 2024 (ongoing)
 The CerCNsig_filt version 2024 based on the absolution copy number profiles of HGSC Cervical samples generated from the https://github.com/IngridHLab/BINP52_CNA_Framework pipeline. Cervical samples were selected based on their HGSC CN signatures in Macintyre et al. 2018 https://github.com/markowetzlab/CNsignatures: samples with similiarity more than the first three signatures (S1-S3). Those cervical samples were considered to be CNA enriched instead of filtering the cervical samples using the cellularity from ACE/Rascal/ichorCNA estimation and mauanlly inspection which could be not completely accurate.
--    1. Filter     
+	
+ 	1. Filter     
 
 #### 10. Assign CerCNsig on Benigh or BRCA VS samples.
 
