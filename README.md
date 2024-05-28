@@ -98,13 +98,13 @@ original 50bp single end. A new control set with 58 human genomes is
 obtained from the 1000 Genomes Project Phase 3 using the following
 filters:
 
-Keep cases that are on Illumina platform, low coverage, not withdrawn and paired-end sequenced in a single lane:
-- g1k <- g1k[g1k$INSTRUMENT_PLATFORM == "ILLUMINA", ]
-- g1k <- g1k[g1k$INSTRUMENT_MODEL == "Illumina HiSeq 2000", ]
-- g1k <- g1k[g1k$ANALYSIS_GROUP == "low coverage", ]
-- g1k <- g1k[g1k$LIBRARY_LAYOUT == "PAIRED", ]
-- g1k <- g1k[g1k$WITHDRAWN == 0, ]
-- g1k <- g1k[!g1k$PAIRED_FASTQ == "", ]
+    Keep cases that are on Illumina platform, low coverage, not withdrawn and paired-end sequenced in a single lane:
+    - g1k <- g1k[g1k$INSTRUMENT_PLATFORM == "ILLUMINA", ]
+    - g1k <- g1k[g1k$INSTRUMENT_MODEL == "Illumina HiSeq 2000", ]
+    - g1k <- g1k[g1k$ANALYSIS_GROUP == "low coverage", ]
+    - g1k <- g1k[g1k$LIBRARY_LAYOUT == "PAIRED", ]
+    - g1k <- g1k[g1k$WITHDRAWN == 0, ]
+    - g1k <- g1k[!g1k$PAIRED_FASTQ == "", ]
 
 The reference genome was downloaded from the 1000 Genomes project and
 indexed by BWA as to be used in the BWA alignment of the control
@@ -370,16 +370,16 @@ data, including pat_124 tissue which has aberration on the entire
 chromosome 12. I have to address that the pipeline seems not using PoN
 when there is normal reference available.
 
-#### Before start: Create PoN in R
-outfile=MaNiLa_Benign_"$type"_PoN_"$bin"kb
-pkg=/home/minerva/miniconda3/envs/R/share/r-ichorcna-0.3.2-1
+    #' Before start: Create PoN in R
+    outfile=MaNiLa_Benign_"$type"_PoN_"$bin"kb
+    pkg=/home/minerva/miniconda3/envs/R/share/r-ichorcna-0.3.2-1
 
-Rscript $pkg/scripts/createPanelOfNormals.R 
-  --filelist $pwd/$wiglist 
-  --gcWig $pkg/extdata/gc_hg19_"$bin"kb.wig 
-  --mapWig $pkg/extdata/map_hg19_"$bin"kb.wig 
-  --centromere $pkg/extdata/GRCh37.p13_centromere_UCSC-gapTable.txt 
-  --outfile $outfile
+    Rscript $pkg/scripts/createPanelOfNormals.R 
+      --filelist $pwd/$wiglist 
+      --gcWig $pkg/extdata/gc_hg19_"$bin"kb.wig 
+      --mapWig $pkg/extdata/map_hg19_"$bin"kb.wig 
+      --centromere $pkg/extdata/GRCh37.p13_centromere_UCSC-gapTable.txt 
+      --outfile $outfile
 
 Based on the ploidy and cellularity range estimated by ACE together with
 Rascal, I modified the default settings (according to
@@ -468,8 +468,8 @@ potentially generate our own sigatures for cytology samples, I will try
 to demonstrate each step of the analysis with the codes in
 'main_functions.R' and source the rest from the 'helper_functions.R'
 instead just running the function:
-
-##### Before start: Prepare segment tables:
+        
+    Before start: Prepare segment tables:
 
 The ACE postanalysis provides a segment table with estimated ACN based
 on the ploidy and cellularity fitting, and the column 'Chromosome',
@@ -478,18 +478,17 @@ analysis. Samples were filtered by cellularity not = 0 and number of
 segments with mean value not = ploidy (indicating CNA) in order to
 capture real signal in the signature analysis.
 
-##### Step 1. Extract 6 fundamental CN features:
+    Step 1. Extract 6 fundamental CN features:
+    -   Segment size
+    -   Breakpoint number (per ten megabases)
+    -   Length of segments with oscillating copy-number
+    -   Breakpoint number (per chromosome arm)
+    -   Change-point copy-number
+    -   Segment copy-number
+    
+    Step 2. (Optional) Apply mixture modelling to breakdown each copy number feature distribution into mixtures of Gaussian or mixtures of Poisson distributions using the [flexmix](https://cran.r-project.org/web/packages/flexmix/index.html) package. For HGSC analysis, the mixture model component definitions from the publication should be used and we skip this step. Otherwise, the optimal number of categories in each feature may differ between cancer types and should be defined by a mixed effects model.
 
--   Segment size
--   Breakpoint number (per ten megabases)
--   Length of segments with oscillating copy-number
--   Breakpoint number (per chromosome arm)
--   Change-point copy-number
--   Segment copy-number
-
-##### Step 2: (Optional) Apply mixture modelling to breakdown each copy number feature distribution into mixtures of Gaussian or mixtures of Poisson distributions using the [flexmix](https://cran.r-project.org/web/packages/flexmix/index.html) package. For HGSC analysis, the mixture model component definitions from the publication should be used and we skip this step. Otherwise, the optimal number of categories in each feature may differ between cancer types and should be defined by a mixed effects model
-
-##### Step 3: Generated a sample-by-component matrix representing the sum of posterior probabilities of each copy-number event being assigned to each component. If the all_components argument is specified, then the sum-of-posteriors is calculated using these components, otherwise the component definitions from the publication (component_parameters.rds) are used.
+    Step 3: Generated a sample-by-component matrix representing the sum of posterior probabilities of each copy-number event being assigned to each component. If the all_components argument is specified, then the sum-of-posteriors is calculated using these components, otherwise the component definitions from the publication (component_parameters.rds) are used.
 
 Heatmap for matrix of 14 tumor samples by 36 components from the
 validation versus matrix with 24 components found by *fitMixtureModels*.
@@ -498,7 +497,7 @@ cohort which contain 117 samples, which indicates our samples might be
 more unified. When the components reduce to 24, the heatmap shows more
 clusters between samples.
 
-##### Step 4: (Advanced) identify number of signatures using Non-negative matrix factorization [NMF package](https://cran.r-project.org/web/packages/NMF/index.html), which factorize the sample-by-component matrix into a signature-by-sample matrix and component by signature matrix. NMF demands the upper bound on the number of signatures be \<\< than both the sample and component number, so a signature search interval of [3,12] is used. The matrix factorization is run 1000 times for each number of signatures, each with a different random seed, and compared the cophentic, dispersion, silhouette, and sparseness scores for the signature-feature matrix (basis), patient-signature matrix (coefficients) and a consensus matrix of patient-by-patient across the 1000 runs. In addition we performed 1000 random shuffles of the input matrix to get a null estimate (Randomised) of each of the scores.
+    Step 4: (Advanced) identify number of signatures using Non-negative matrix factorization [NMF package](https://cran.r-project.org/web/packages/NMF/index.html), which factorize the sample-by-component matrix into a signature-by-sample matrix and component by signature matrix. NMF demands the upper bound on the number of signatures be \<\< than both the sample and component number, so a signature search interval of [3,12] is used. The matrix factorization is run 1000 times for each number of signatures, each with a different random seed, and compared the cophentic, dispersion, silhouette, and sparseness scores for the signature-feature matrix (basis), patient-signature matrix (coefficients) and a consensus matrix of patient-by-patient across the 1000 runs. In addition we performed 1000 random shuffles of the input matrix to get a null estimate (Randomised) of each of the scores.
 
 A value (number of signatures) defines the point of stability in the
 cophenetic, dispersion and silhouette coefficients, and is the maximum
@@ -509,9 +508,9 @@ would force the sparseness in the signature by feature matrix (basis) to
 be greater than that which could be obtained by randomly shuffling the
 input matrix.
 
-##### Step 5. Generate the chosen number of signatures with NMF. This is a heavy step and should be run in R instead of markdown mode. The output NMF contains sample by component matrix and component by signature matrix.
+    Step 5. Generate the chosen number of signatures with NMF. This is a heavy step and should be run in R instead of markdown mode. The output NMF contains sample by component matrix and component by signature matrix.
 
-##### Step 6: Quantify signatures: Given a sample-by-component matrix this function quantifies signature exposures using the LCD function from the YAPSA package, returning a normalized signature-by-sample matrix. If the component_by_signature matrix is specified then this matrix is used to define the signatures otherwise the signature definitions from the manuscript (feat_sig_mat.rds) are used. Signature exposure matrices were normalised to sum to one and exposures less than 0.01 were considered 0.
+    Step 6: Quantify signatures: Given a sample-by-component matrix this function quantifies signature exposures using the LCD function from the YAPSA package, returning a normalized signature-by-sample matrix. If the component_by_signature matrix is specified then this matrix is used to define the signatures otherwise the signature definitions from the manuscript (feat_sig_mat.rds) are used. Signature exposure matrices were normalised to sum to one and exposures less than 0.01 were considered 0.
 
 #### 7. CNsignature comparison between BRITROC, our HGSC tumor and HGSC VS samples:
 
@@ -533,17 +532,17 @@ Here we compare the average exposure of each signature from different data sets 
 
 Next we will perform similar validation for the CerCNsig. The CerCNsig version 1 using all HGSC VS samples to extract the components (32) and signatures (6).
 
--    1.  Generate CerCNsig_all from the HGSC tumor samples.
--    2.  Generate CerCNsig from HGSC tumor samples contains TF.
--    3.  Generate CerCNsig from BritROC hq samples.
--    4.  Reorder component and plot heatmap.
--    5.  Compare CerCNsig_all across Britroc, HGSC tumor and HGSC VS
--    6.  Compare CerCNsig_all component weights: one histogram for each signature, containing the relative weighting of each of the components, colour coded by the feature distribution they come from.
--    7.  Compare CerCNsig_all to the CNsig
--    8.  Underlying Feature distributions of different sample sets
--    9.  Mixture model for CerCNsig_all
--    10. VS-CN Component means and standard deviations
--    11. Normalized signature exposure across cohorts
+    -    1.  Generate CerCNsig_all from the HGSC tumor samples.
+    -    2.  Generate CerCNsig from HGSC tumor samples contains TF.
+    -    3.  Generate CerCNsig from BritROC hq samples.
+    -    4.  Reorder component and plot heatmap.
+    -    5.  Compare CerCNsig_all across Britroc, HGSC tumor and HGSC VS
+    -    6.  Compare CerCNsig_all component weights: one histogram for each signature, containing the relative weighting of each of the components, colour coded by the feature distribution they come from.
+    -    7.  Compare CerCNsig_all to the CNsig
+    -    8.  Underlying Feature distributions of different sample sets
+    -    9.  Mixture model for CerCNsig_all
+    -    10. VS-CN Component means and standard deviations
+    -    11. Normalized signature exposure across cohorts
 
 #### 9. [CerCNsig_filt](https://github.com/NyKepler/CerCNsig/tree/main/Tools/CNsignatures) validation and comparison Latest Version 2024 (ongoing)
 The CerCNsig_filt version 2024 based on the absolution copy number profiles of HGSC Cervical samples generated from the https://github.com/IngridHLab/BINP52_CNA_Framework pipeline. Cervical samples were selected based on their HGSC CN signatures in Macintyre et al. 2018 https://github.com/markowetzlab/CNsignatures: samples with similiarity more than the first three signatures (S1-S3). Those cervical samples were considered to be CNA enriched instead of filtering the cervical samples using the cellularity from ACE/Rascal/ichorCNA estimation and mauanlly inspection which could be not completely accurate.
@@ -562,13 +561,18 @@ algorithm:
 
 ##### 1. Normalizing potential biases in the sequencing data using BICseq2-norm function. 
 
-
 According to the BICseq2 requirements, I adjusted the *BWA* alignment
 setting and *samtools* view function in a slightly different way in
 order to filter out unique mapped read pairs with read length not
 smaller than 100bp. *samtools* stats function provides the estimated
 fragment size for later normalization.
 
+    After aligment: Filter unique mapped read-pairs with same read length at least 100bp
+    samtools view -@ $threads -F 260 -f 3 -q 1 -h $swd/$library.sort.bam | awk '/^@/ || length($10) >= 100' | samtools view -@ $threads -Sb > $swd/$library.filt.bam
+
+    Prepocess: Generate seq file
+    samtools view -@ $threads $bam/$library.filt.bam chr$x | perl $samtool_gu unique - | cut -f 4 > $readPosFile
+    
 The .seq files of each sample were then process by BICseq2-norm.pl to
 remove the GC and mappability biases in the reads, and converted into
 .txt files which contain 'obs' observed and 'expected' number of reads,
@@ -593,48 +597,32 @@ information criterion in the segmentation steg.
   # --title=<string>: title of the figure
   # --tmp=<string>: the tmp directory;
 
-## Default 100bp but according to the latest BICseq2 publication (2016), I normalized data and set the initial bin size as 10 bp for later segmentation as well as the penalty parameter λ was chosen as 1.2. 
-bin=10 
-binsize=$bin"bp"
-
-## Create config file with header and fill in location of each file into config file
-library="library_id"
-config=/path/to/$library.norm-config.$binsize.txt
-printf "chromName\tfaFile\tMapFile\treadPosFile\tbinFileNorm\n" > $config  
-
-for x in {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X,Y,M}
-do 
-chromName=chr$x
-faFile=/path/to/BICseq2/Reference/hg19.chr$x.fa
-MapFile=/path/to/BICseq2/MapFile/hg19.CRC.100mer.chr$x.txt
-readPosFile=/path/to/$library.chr$x.seq 
-binFileNorm=/path/to/$library.chr$x.$binsize.norm.bin
-printf "$chromName\t$faFile\t$MapFile\t$readPosFile\t$binFileNorm\n" >> $config 
-
-echo $x
-done
-
-## Normalizing potential biases in the sequencing data using BICseq2-norm. Fragment size is extracted from 
-BICSEQ_NORM=/path/to/BICseq2/BICseq_Norm/NBICseq-norm.pl
-tmp=/path/to/tmp
-mkdir -p $tmp
-readlen=100
-stats=/path/to/$library.filt.stats.txt
-fragsize=$(awk '/'average:'/ {print int($5);}' $stats)
-out=/path/to/$library.norm.out.$binsize.txt
-
-## Prepare a configuration text file with following headers
-printf "chromName\tfaFile\tMapFile\treadPosFile\tbinFileNorm\n" > $config  
-
 ## Generate normalized bin files
 perl $BICSEQ_NORM -b=$bin -l=$readlen -s=$fragsize --gc_bin --NoMapBin --fig=$library --title=$library --tmp=$tmp $config $out
-
 ```
-2.  Detecting CNVs based on the normalized data by using BICseq2-seg.
+##### 2. Detecting CNVs based on the normalized data by using BICseq2-seg.
 
 The segmentation can either run on stand-alone tumor sample or together
 with a control sample ex. normal tissue or blood from the same patient.
 Below I demonstrate the process with the control sample.
+
+```{bash BICseq2-Segment}
+## Options:
+  	#--lambda=<float>: the (positive) penalty used for BICseq2
+	#--tmp=<string>: the tmp directory
+    #--help: print this message
+    #--fig=<string>: plot the CNV profile in a png file
+    #--title=<string>: the title of the figure
+    #--nrm: do not remove likely germline CNVs (with a matched normal) or segments with bad mappability (without a matched normal)
+    #--bootstrap: perform bootstrap test to assign confidence (only for one sample case)
+    #--noscale: do not automatically adjust the lambda parameter according to the noise level in the data
+    #--strict: if specified, use a more stringent method to ajust the lambda parameter
+    #--control: the data has a control genome
+    #--detail: if specified, print the detailed segmentation result (for multiSample only)
+
+## For stand-alone sample without control!!
+perl $BICSEQ_SEG --tmp=$tmp --lambda=$lambda --detail --bootstrap --fig=$png --title=$library.$binsize.$lambda $config $out 
+```
 
 
 
