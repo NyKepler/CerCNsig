@@ -44,8 +44,9 @@ modified QDNAseq, BICseq2 and HMMcopy (prior ichorCNA). Tumor fraction
 signatures are obtained by CNsignatures and focal CNA by GISTIC2. Other
 data analysis and visualization are done in R and RStudio.
 
-<img align = "center" width="500" alt="image" src="https://github.com/NyKepler/CerCNsig/assets/111468388/4ecd3f0f-4920-4130-aae5-8e6d4fc154b3">
-
+<p align ="center">
+<img width="500" alt="image" src="https://github.com/NyKepler/CerCNsig/assets/111468388/4ecd3f0f-4920-4130-aae5-8e6d4fc154b3">
+</p>
 
 ## 4. Data Analysis and Results
 
