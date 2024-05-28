@@ -4,28 +4,28 @@ Generation of Copy Number Signatures for Cervical Samples from High Grade Serous
 
 Ovarian cancer is a heterogeneous disease consisting of different
 histological subtypes with potentially different origins. High-grade
-serous ovarian carcinoma (HGSOC) is the most common and aggressive form
+serous ovarian carcinoma (HGSC) is the most common and aggressive form
 of epithelial ovarian cancer, and prior studies have shown the p53
 signature lesions and serous tubal intraepithelial carcinomas (STICs) in
 the fallopian tube are likely to be the common biologic origin and
-precursors of HGSOC and could be detected in the cervical specimens
+precursors of HGSC and could be detected in the cervical specimens
 collected from 20 months to 6 years before the diagnosis 1,2. The
 ultimate goal of this study is to detect genome-wide copy number
 aberrations (CNAs) in asymptomatic cervical cytology specimens and
-generate unique tumorigenic signatures for early detection of HGSOC.
+generate unique tumorigenic signatures for early detection of HGSC.
 
 ## 2. Cohort Design
 
-The first cohort contains HGSOC, BRCA1/2 and benign patients who were
+The first cohort contains HGSC, BRCA1/2 and benign patients who were
 operated in southern Sweden hospitals between 2015-2017. Their Blood,
 plasma, endometrial biopsy, tumor or tissue as well as a liquid-based
 cytology (LBC) sample were collected at the surgery and stored at -80°.
 Their archival cytology slides including PapSmear, liquid-based Pap or
 ThinPrep® were retrieved from pathology departments. The second cohort
 contains archival methanol-based ThinPrep® LBC, slides and tumor tissue
-from HGSOC patients diagnosed between 2018-2020. Till now total 320 DNA
+from HGSC patients diagnosed between 2018-2020. Till now total 320 DNA
 samples have been processed and analysed in which 7 patients are Benign,
-4 BRCA and 19 HGSOC upon that 7 HGSOC are from cohort 2 and rest from
+4 BRCA and 19 HGSC upon that 7 HGSC are from cohort 2 and rest from
 cohort 1.
 
 ## 3. Methods and Material
@@ -251,17 +251,17 @@ $$
 copies = ploidy + (signal − standard) \frac{cellularity * ploidy + 2 (1 − cellularity)}{cellularity * standard}
 $$
 
-To summarize the copy number alteration in our HGSOC sample, over 15% of
+To summarize the copy number alteration in our HGSC sample, over 15% of
 them have amplification in regions containing MECOM, PIK3CA, KRAS, CCNE1
 and AKT2, while 15% of them have deletion in CDKN2A/B, NF1, ERBB2
 (proximate) and CCNE1. Large segment amplification on 3q, 10p, 12p and
 20q, and deletion on 4p, 8p, 11p and 16q. According to the Z.Cheng's
 paper from McNeish lab, amplification in genes like PTEN, CCNE1, CCND1,
-AKT2 and deletion in TP53 are more frequent in early stage HGSOC, while
+AKT2 and deletion in TP53 are more frequent in early stage HGSC, while
 amplifiation in PTEN and KRAS are more seen in later stage. More detail
 focal CNA analysis will be done by GISTIC2.
 
-#### 4. Rascal absolute copy number analysis: Benchmark with ACE shows super for HGSOC tumor samples but not ideal for cytology VS.
+#### 4. Rascal absolute copy number analysis: Benchmark with ACE shows super for HGSC tumor samples but not ideal for cytology VS.
 
 *Rascal* was developed based on concepts of ACE and further adapted to
 the biological nature of ovarian tumor samples. The mathematics of this
@@ -303,8 +303,8 @@ $$
 The default setting in the'fit_absolute_copy_number' function is listed
 below and unlike the original ACE penalty or penploidy. My guess is that
 they have validated those parameters on their OC cell lines, PDX models
-and large HGSOC patient cohort. In order to make a fair comparison, I
-process the HGSOC tumor segment data in 100kb from QDNAseq with some
+and large HGSC patient cohort. In order to make a fair comparison, I
+process the HGSC tumor segment data in 100kb from QDNAseq with some
 modifications on max/min ploidy and min cellularity to keep it similar
 to the ACE squaremodel version 1. The distance method is kept as default
 MAD as well. Additional model adjusting was done on pat_48, pat_81 and
@@ -432,12 +432,12 @@ of parameters is recommended.
 
 The final estimation is revised manually that the tumor samples results are based on Squaremodel or Rascal while the rest are mostly based on ichorCNA with 0.03 as threshold meaning anything below that will be called 0 cellularity and normal diploidy.
 
-#### 6. CNsigntures Analysis: whole genome copy number signature analysis to extract HGSOC related signatures from pre-diagnotic/pre-sytompatic cytology samples.
+#### 6. CNsigntures Analysis: whole genome copy number signature analysis to extract HGSC related signatures from pre-diagnotic/pre-sytompatic cytology samples.
 
 According to *CNsigntures* the analysis just require a list of absolute
 segmented copy number tables which contains "chromosome", "start",
 "end", "segVal".. That seems easy but no that simple as you think! In
-the original validation for HGSOC, samples were first analysed with sWGS
+the original validation for HGSC, samples were first analysed with sWGS
 and TP53 Tagged amplicon seq, and then processed using ABCEL (might be
 released as Rascal now) to generate absolute copy-number profiles. All
 samples were manually inspected and the copy-number fit adjusted if
@@ -483,7 +483,7 @@ capture real signal in the signature analysis.
 -   Change-point copy-number
 -   Segment copy-number
 
-##### Step 2: (Optional) Apply mixture modelling to breakdown each copy number feature distribution into mixtures of Gaussian or mixtures of Poisson distributions using the [flexmix](https://cran.r-project.org/web/packages/flexmix/index.html) package. For HGSOC analysis, the mixture model component definitions from the publication should be used and we skip this step. Otherwise, the optimal number of categories in each feature may differ between cancer types and should be defined by a mixed effects model
+##### Step 2: (Optional) Apply mixture modelling to breakdown each copy number feature distribution into mixtures of Gaussian or mixtures of Poisson distributions using the [flexmix](https://cran.r-project.org/web/packages/flexmix/index.html) package. For HGSC analysis, the mixture model component definitions from the publication should be used and we skip this step. Otherwise, the optimal number of categories in each feature may differ between cancer types and should be defined by a mixed effects model
 
 ##### Step 3: Generated a sample-by-component matrix representing the sum of posterior probabilities of each copy-number event being assigned to each component. If the all_components argument is specified, then the sum-of-posteriors is calculated using these components, otherwise the component definitions from the publication (component_parameters.rds) are used.
 
@@ -512,8 +512,8 @@ input matrix.
 #### 7. CNsignature comparison between BRITROC, our HGSC tumor and HGSC VS samples:
 
 I validate the TuCNsig which generated using Brenton's 36 CN_components
-on either HGSOC tumor samples (filtered away samples have zero tumor
-fraction, 14 tumor samples) or HGSOC Cervical samples (VS):
+on either HGSC tumor samples (filtered away samples have zero tumor
+fraction, 14 tumor samples) or HGSC Cervical samples (VS):
 ##### 1.  Generate CNsig from the HGSC tumor samples.
 ##### 2.  Generate CNsig from HGSC Cervical samples (VS).
 ##### 3.  Reorder component and plot heatmap.
@@ -525,7 +525,7 @@ fraction, 14 tumor samples) or HGSOC Cervical samples (VS):
 ##### 10. Normalized signature exposure across cohorts
 Here we compare the average exposure of each signature from different data sets or cohorts. 
 
-#### 8. CerCNsig_all validation and comparison
+#### 8. CerCNsig_all validation and comparison Version 1
 
 Next we will perform similar validation for the CerCNsig. The CerCNsig version 1 using all HGSC VS samples to extract the components (32) and signatures (6).
 
@@ -541,7 +541,7 @@ Next we will perform similar validation for the CerCNsig. The CerCNsig version 1
 ##### 10. VS-CN Component means and standard deviations
 ##### 11. Normalized signature exposure across cohorts
 
-#### 9. CerCNsig_filt validation and comparison
+#### 9. CerCNsig_filt validation and comparison Version 1
 ##### 1.  Generate CerCNsig_filt from the HGSC tumor samples.
 ##### 2.  Generate CerCNsig from HGSC tumor samples contains TF.
 ##### 3.  Generate CerCNsig from BritROC hq samples.
