@@ -14,6 +14,8 @@ library(patchwork)
 library(cowplot)
 library(RColorBrewer)
 library(scales)
+library(data.table)
+
 
 ## 1. Import data
 folder.name <- "Randomforest_CNsig_filt"
@@ -23,11 +25,22 @@ setwd(paste(path_home_r(), "CerCNsig", folder.name, sep = "/"))
 chrlen<-read.table("/home/researcher/CerCNsig/Script/data/hg19.chrom.sizes.txt",sep="\t",stringsAsFactors = F)[1:24,]
 gaps<-read.table("/home/researcher/CerCNsig/Script/data/gap_hg19.txt",sep="\t",header=F,stringsAsFactors = F)
 
-##' Individual data files
-sample.type <- "Benign_VS_good" #' Change to other sample types: HGSC_Tumor, HGSC_VS_good, Benign_VS_good
-load(paste0(sample.type, ".rdata")) 
+##' Prepare individual data files
+load("All_Cervical.rdata")
+All_Cervical <- read_csv("/home/researcher/CerCNsig/input/All_Cervical.csv")
+HGSC.VS <- All_Cervical[All_Cervical$Group %like% "HGSC",] # 128 samples
+Benign.VS <- All_Cervical[All_Cervical$Group %like% "Benign",] # 55 samples
+RRSO.VS <- All_Cervical[All_Cervical$Group %like% "RRSO",] # 30 samples
+
+segment_tables.HGSC.VS <- segment_tables[c(HGSC.VS$Library)]
+segment_tables.Benign.VS <- segment_tables[c(Benign.VS$Library)]
+segment_tables.RRSO.VS <- segment_tables[c(RRSO.VS$Library)]
+
+load("HGSC_Tumor.rdata")
+segment_tables.HGSC.Tumor <- segment_tables # 18 samples
 
 
+#' set color and plot theme
 fillcol<- hue_pal()(6)
 line_size<-0.25
 cbPalette <- c(RColorBrewer::brewer.pal(8,"Set2"),RColorBrewer::brewer.pal(9,"Set1"),"black")
@@ -48,6 +61,9 @@ dist_theme<-my_theme+
         plot.background = element_rect(fill = "transparent"),
         axis.text.x = element_text(margin=ggplot2::margin(0,1,0,0,"pt")))
 
+#' Extract segment features and distribution
+segment_tables <- segment_tables.HGSC.Tumor # change for different sample type and group
+sample.type <- "HGSC.Tumor" # change accordingly
 all_dist_dat<-c()
 seg_num<-getBPnum(segment_tables,chrlen)
 all_dist_dat<-rbind(all_dist_dat,cbind(seg_num,distribution="BPnum"))
