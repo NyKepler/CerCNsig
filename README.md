@@ -129,6 +129,8 @@ differences on sequencing read length (2x100 vs 50bp) and depth (\~2 vs
 \~0.1X) of the two control datasets. Note, this should not be run in
 markdown mode due to heavy computation.
 
+Spot noisy samples: https://github.com/ccagc/QDNAseq/issues/35
+
 #### 3. [ACE](https://github.com/NyKepler/CerCNsig/tree/main/Tools/ACE) absolute copy number analysis: 
 -    Ploidy and cellularity estimation as well as absolute copy number fitting on QDNAseq segmented relative copy number data. 
 
