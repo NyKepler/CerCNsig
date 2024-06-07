@@ -551,7 +551,11 @@ Next we will perform similar validation for the CerCNsig. The CerCNsig version 1
 #### 9. [CerCNsig_filt](https://github.com/NyKepler/CerCNsig/tree/main/Tools/CNsignatures) validation and comparison Latest Version 2024 (ongoing)
 The CerCNsig_filt version 2024 based on the absolution copy number profiles of HGSC Cervical samples generated from the https://github.com/IngridHLab/BINP52_CNA_Framework pipeline. Cervical samples were selected based on their HGSC CN signatures in Macintyre et al. 2018 https://github.com/markowetzlab/CNsignatures: samples with similiarity more than the first three signatures (S1-S3). Those cervical samples were considered to be CNA enriched instead of filtering the cervical samples using the cellularity from ACE/Rascal/ichorCNA estimation and mauanlly inspection which could be not completely accurate.
 	
- 	1. Filter     
+ 	1. Filter away noisy cervical samples based on QDNAseq CN profile and the differences between expected standard deviation (Eσ) and measured standard deviation. 
+  	2. Select the cervical samples have HGSC CNsig > 3 (42 samples remained).
+   	3. 
+   
+  
 
 #### 10. Assign CerCNsig on Benigh or BRCA Cervical samples.
 
