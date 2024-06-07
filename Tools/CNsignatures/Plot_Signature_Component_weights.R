@@ -43,7 +43,7 @@ pdat$Distribution<-plyr::revalue(pdat$Distribution,
 pdat$Distribution<-factor(pdat$Distribution,levels=c("Breakpoint number","Copy-number","CN changepoint","Breakpoints per chr arm","Oscilating CN length","Segment size"))
 
 ## plot all signature weight
-pdf(file = "CerCNsig_component_weights.pdf", width = 6, height = 15, onefile = F)
+pdf(file = "CerCNsig_component_weights.pdf", width = 6, height = 20, onefile = F)
 ggplot(pdat,
        aes(x=interaction(Feature,Distribution),
            y=value,fill=Distribution,group=Distribution))+
@@ -60,5 +60,5 @@ ggplot(pdat,
   coord_cartesian(ylim=c(0,1))+
   ggtitle("HGSC Cervical")+
   xlab("Component number")+
-  facet_wrap(~sig, ncol = 1)
+  facet_wrap(~sig, ncol = 1, scales = "free")
 dev.off()
