@@ -157,8 +157,10 @@ relative signal is calculated for all integer copy numbers "copies"
 between 1 and 12 as below:
 
 $$
-Signal^{expected}=Standard^{observed}*\frac{cellularity*copies+2*(1-cellularity)}{cellularity*ploidy+2*(1-cellularity)}
+Signal^{expected} = Standard^{observed} * {\frac{cellularity * copies+2*(1-cellularity)}{cellularity * ploidy+2*(1-cellularity)}}
 $$ 
+
+
 The "standard" is the median segment value of all bins as mentioned before and ploidy is the general ploidy of the aberrant cells.
 
 The difference between the segment value and the closest expected signal
@@ -251,6 +253,7 @@ Postanalysis based on the chosen fitting (cellularity and ploidy) with
 given standard = 1 is performed to scale bin values and segment values
 to absolute copies using the formula below, and a segment table with
 absolute copy number is generated using postanalysisloop function: 
+	
 $$
 copies = ploidy + (signal − standard) \frac{cellularity * ploidy + 2 (1 − cellularity)}{cellularity * standard}
 $$
