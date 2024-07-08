@@ -553,16 +553,20 @@ Next we will perform similar validation for the CerCNsig. The CerCNsig version 1
 	10. VS-CN Component means and standard deviations
 	11. Normalized signature exposure across cohorts
 
-#### 9. [CerCNsig_filt](https://github.com/NyKepler/CerCNsig/tree/main/Tools/CNsignatures) validation and comparison Latest Version 2024 (ongoing)
+#### 9. [CerCNsig_filt](https://github.com/NyKepler/CerCNsig/tree/main/Tools/CNsignatures) validation and comparison latest version 2024 (ongoing)
 The CerCNsig_filt version 2024 based on the absolution copy number profiles of HGSC Cervical samples generated from the https://github.com/IngridHLab/BINP52_CNA_Framework pipeline. Cervical samples were selected based on their HGSC CN signatures in Macintyre et al. 2018 https://github.com/markowetzlab/CNsignatures: samples with similiarity more than the first three signatures (S1-S3). Those cervical samples were considered to be CNA enriched instead of filtering the cervical samples using the cellularity from ACE/Rascal/ichorCNA estimation and mauanlly inspection which could be not completely accurate.
 	
- 	1. Filter away noisy cervical samples based on QDNAseq CN profile and the differences between expected standard deviation (Eσ) and measured standard deviation. 
-  	2. Select the cervical samples have HGSC CNsig > 3 (42 samples remained).
-   	3. 
-   
-  
+ 	1.  Filter away noisy cervical samples based on QDNAseq CN profile and the differences between expected standard deviation (Eσ) and measured standard deviation. 
+  	2.  Select the cervical samples have HGSC CNsig > 3 (42 samples remained).
+	3.  Compare underlying distribution of six HGSC CNsignature copy number features in tumor and all cervical samples. 
+ 	4.  Mixture modelling and extract 36 unique components from the selected 42 HGSC cervical samples.
+   	5.  Generate new version of CerCN signatures (6 sigs) from the selected 42 HGSC cervical samples.
+    	6.  Compare the cosine similarity of each CerCN signatures across Benign, RRSO and HGSC groups.
+     	7.  Compare the cosine similarity of CerCN signatures of different diagnostic time points within the same group. 
+	8.  Defining the CerCN signatures by comparing the component weights of each signature to the HGSC CNsignatures: a histogram containing the relative weighting of each of the components, colour coded as the feature distribution.
+    
 
-#### 10. Assign CerCNsig on Benigh or BRCA Cervical samples.
+#### 10. Randomforest classification model for cervical samples.
 
 #### 11. [Tools/BICseq2](https://github.com/NyKepler/CerCNsig/tree/main/Tools/BICseq2) copy number analysis: 
 -    Most accurate annotation and copy number calling.
