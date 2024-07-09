@@ -1,8 +1,6 @@
-# Cervical copy number signatures for early detection of high-grade serous tubo-ovarian carcinoma![image](https://github.com/NyKepler/CerCNsig/assets/111468388/5624c7ba-7cf6-47db-afe6-803639a330d7)
-
+# Cervical copy number signatures for early detection of high-grade serous tubo-ovarian carcinoma
 
 ## 1. Introduction
-
 Ovarian cancer is a heterogeneous disease consisting of different histological subtypes with potentially different origins. High-grade serous ovarian carcinoma (HGSC) is the most common and aggressive form
 of epithelial ovarian cancer, and prior studies have shown the p53 signature lesions and serous tubal intraepithelial carcinomas (STICs) in the fallopian tube are likely to be the common biologic origin and
 precursors of HGSC and could be detected in the cervical specimens collected from 20 months to 6 years before the diagnosis 1,2. The ultimate goal of this study is to detect genome-wide copy number aberrations (CNAs) in asymptomatic cervical cytology specimens and generate unique tumorigenic signatures for early detection of HGSC.
