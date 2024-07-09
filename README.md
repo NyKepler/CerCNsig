@@ -556,17 +556,54 @@ Next we will perform similar validation for the CerCNsig. The CerCNsig version 1
 #### 9. [CerCNsig_filt](https://github.com/NyKepler/CerCNsig/tree/main/Tools/CNsignatures) validation and comparison latest version 2024 (ongoing)
 The CerCNsig_filt version 2024 based on the absolution copy number profiles of HGSC Cervical samples generated from the https://github.com/IngridHLab/BINP52_CNA_Framework pipeline. Cervical samples were selected based on their HGSC CN signatures in Macintyre et al. 2018 https://github.com/markowetzlab/CNsignatures: samples with similiarity more than the first three signatures (S1-S3). Those cervical samples were considered to be CNA enriched instead of filtering the cervical samples using the cellularity from ACE/Rascal/ichorCNA estimation and mauanlly inspection which could be not completely accurate.
 	
- 	1.  Filter away noisy cervical samples based on QDNAseq CN profile and the differences between expected standard deviation (Eσ) and measured standard deviation. 
-	2.  Select the cervical samples have HGSC CNsig > 3 (42 samples remained).
-	3.  Compare underlying distribution of six HGSC CNsignature copy number features in tumor and all cervical samples. 
-	4.  Mixture modelling and extract 36 unique components from the selected 42 HGSC cervical samples.
-	5.  Generate new version of CerCN signatures (6 sigs) from the selected 42 HGSC cervical samples.
-	6.  Compare the cosine similarity of each CerCN signatures across Benign, RRSO and HGSC groups.
-	7.  Compare the cosine similarity of CerCN signatures of different diagnostic time points within the same group. 
-	8.  Defining the CerCN signatures by comparing the component weights of each signature to the HGSC CNsignatures: a histogram containing the relative weighting of each of the components, colour coded as the feature distribution.
+	1.  Select the cervical samples have HGSC CNsig > 3 (42 samples remained).
+	2.  Compare underlying distribution of six HGSC CNsignature copy number features in tumor and all cervical samples. 
+	3.  Mixture modelling and extract 36 unique components from the selected 42 HGSC cervical samples.
+	4.  Generate new version of CerCN signatures (6 sigs) from the selected 42 HGSC cervical samples.
+	5.  Compare the cosine similarity of each CerCN signatures across Benign, RRSO and HGSC groups.
+	6.  Compare the cosine similarity of CerCN signatures of different diagnostic time points within the same group. 
+	7.  Defining the CerCN signatures by comparing the component weights of each signature to the HGSC CNsignatures: a histogram containing the relative weighting of each of the components, colour coded as the feature distribution.
     
 
 #### 10. Randomforest classification model for cervical samples.
+To apply random forest modeling to generate a prediction or classification model on cervical samples, we first filter away noisy cervical samples based on QDNAseq CN profile and the differences between expected standard deviation (Eσ) and measured standard deviation, and then applied all 36 components from 163 selected cervical samples from both HGSC and benign patients in the model.
+
+```{bash randomforest k-fold validation}
+#' Define repeated cross validation with 10 folds and 100 repeats
+repeat_cv <- trainControl(method='repeatedcv', number=10, repeats=100, search = "grid")
+
+#' Split the data so that we use 70% of it for training
+train_index <- createDataPartition(y=VS$Class, p=0.7, list=FALSE)
+
+#' Subset the data
+training_set <- VS[train_index, ] #' 115
+testing_set <- VS[-train_index, ] #' 48
+
+#' Train a random forest model
+forest <- train(
+  
+  #' Formula. We are using all variables to predict Species
+  Class~., 
+  
+  #' Source of data; remove the Species variable
+  data=training_set, 
+  
+  #' Number of trees to grow. 
+  #' Ensure that every input row gets predicted at least a few times.
+  #' Here we set 10 times.
+  #' ntree = nrow(training_set)*10 
+  #' https://stats.stackexchange.com/questions/36165/does-the-optimal-number-of-trees-in-a-random-forest-depend-on-the-number-of-pred
+  
+  #' `rf` method for random forest
+  method='rf', 
+  
+  #' Add repeated cross validation as trControl
+  trControl=repeat_cv,
+  
+  #' Accuracy to measure the performance of the model
+  metric='Accuracy')
+```
+ 
 
 #### 11. [Tools/BICseq2](https://github.com/NyKepler/CerCNsig/tree/main/Tools/BICseq2) copy number analysis: 
 -    Most accurate annotation and copy number calling.
