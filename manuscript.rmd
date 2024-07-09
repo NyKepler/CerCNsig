@@ -30,15 +30,13 @@ samples have been processed and analysed in which 7 patients are Benign,
 cohort 1.
 
 ## 3. Methods and Material
-DNA was extracted by Qiagen silica column or Maxwell magnetic bead-based
-method based on the sample type and performance. DNA was measured by
-Qubit fluorometric assays and quality-checked by Illumina TruSeq FFPE
-Library Prep QC Kit (qPCR). 1-10ng DNA was used to prepare
-next-generation-sequencing (NGS) library by QIAseq FX DNA library Prep
-kit. The shallow or low-pass whole genome sequencing (WGS) is performed
-on Illumina NovaSeq 6000 platforms.
+DNA was extracted by Qiagen silica column or Maxwell magnetic bead-based method based on the sample type and performance. DNA was measured by Qubit fluorometric assays and quality-checked by Illumina TruSeq FFPE Library Prep QC Kit (qPCR). 1-10ng DNA was used to prepare next-generation-sequencing (NGS) library by QIAseq FX DNA library Prep kit. The shallow or low-pass whole genome sequencing (WGS) is performed on Illumina NovaSeq 6000 platforms.
 
-#### Steps
+
+#### Bioinformatic workflow
+
+[BINP52_CNA_Framework](https://github.com/IngridHLab/BINP52_CNA_Framework), a pipeline to generate copy number profiles and detect copy number signatures from shallow whole genome sequening (sWGS) samples.
+
 The version of tools and packages to be used will be specified in each step (see chapter 3). The scripts within the pipeline are based on Python (v3.11.6) and R (v4.3.2).
 - (1) Preprocessing. This step includes quality assessment and quality trimming on the raw reads. (`Fastp` will be used for QC and trimming, together with `fastqc` and `multiQC` to generate the QC reports.)
 - (2) Alignment. The human reference genome will be indexed. And the reads will be mapped to the reference genome. (`BWA` will be used for both indexing and alignment.)
