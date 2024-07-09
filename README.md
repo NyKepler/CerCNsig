@@ -565,7 +565,7 @@ The CerCNsig_filt version 2024 based on the absolution copy number profiles of H
 	7.  Defining the CerCN signatures by comparing the component weights of each signature to the HGSC CNsignatures: a histogram containing the relative weighting of each of the components, colour coded as the feature distribution.
     
 
-#### 10. Randomforest classification model for cervical samples.
+#### 10. [RandomForest](https://github.com/NyKepler/CerCNsig/tree/main/Tools/RandomForest) classification model for cervical samples.
 To apply random forest modeling to generate a prediction or classification model on cervical samples, we first filter away noisy cervical samples based on QDNAseq CN profile and the differences between expected standard deviation (Eσ) and measured standard deviation, and then applied all 36 components from 163 selected cervical samples from both HGSC and benign patients in the model.
 
 ```{bash randomforest k-fold validation}
