@@ -17,6 +17,8 @@ DNA was extracted by Qiagen silica column or Maxwell magnetic bead-based method 
 #### Bioinformatic workflow
 [BINP52_CNA_Framework](https://github.com/IngridHLab/BINP52_CNA_Framework), a pipeline to generate copy number profiles and detect copy number signatures from shallow whole genome sequening (sWGS) samples.
 
+[CerCNsig](https://github.com/IngridHLab/CerCNsig), a workflow to optimal absolute copy number profiles and generate of copy number signatures for cervical Samples from high grade serous carcinoma patients.
+
 The version of tools and packages to be used will be specified in each step (see chapter 3). The scripts within the pipeline are based on Python (v3.11.6) and R (v4.3.2).
 - (1) Preprocessing. This step includes quality assessment and quality trimming on the raw reads. (`Fastp` will be used for QC and trimming, together with `fastqc` and `multiQC` to generate the QC reports.)
 - (2) Alignment. The human reference genome will be indexed. And the reads will be mapped to the reference genome. (`BWA` will be used for both indexing and alignment.)
