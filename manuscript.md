@@ -108,5 +108,5 @@ To apply random forest modeling to generate a prediction or classification model
 Rscript Tools/RandomForest/Randomforest_CV_CerCNsig_filt.R
 ```
 #### 6. Visualization of signature cosine similarity in the [BINP52_CNA_Framework](https://github.com/IngridHLab/BINP52_CNA_Framework)
-In order to compare 
+In order to compare HGSC CN signatures, pan-cancer CIN signatures, panConusig as well as CerCN signatures across all sample types and diagnostic time points,   
 [Other_scripts](https://github.com/IngridHLab/BINP52_CNA_Framework/tree/main/Other_scripts)
