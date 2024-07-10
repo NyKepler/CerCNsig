@@ -1,4 +1,4 @@
-# Cervical copy number signatures for early detection of high-grade serous tubo-ovarian carcinoma."
+# Cervical copy number signatures for early detection of high-grade serous tubo-ovarian carcinoma.
 
 ## 1. Introduction
 Ovarian cancer is a heterogeneous disease consisting of different histological subtypes with potentially different origins. High-grade serous ovarian carcinoma (HGSC) is the most common and aggressive form
