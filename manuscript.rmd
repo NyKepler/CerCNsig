@@ -20,7 +20,6 @@ The first cohort contains HGSC, BRCA1/2 and benign patients who were operated in
 ## 3. Copy number analysis
 DNA was extracted by Qiagen silica column or Maxwell magnetic bead-based method based on the sample type and performance. DNA was measured by Qubit fluorometric assays and quality-checked by Illumina TruSeq FFPE Library Prep QC Kit (qPCR). 1-10ng DNA was used to prepare next-generation-sequencing (NGS) library by QIAseq FX DNA library Prep kit. The shallow or low-pass whole genome sequencing (WGS) is performed on Illumina NovaSeq 6000 platforms.
 
-
 ### Bioinformatic workflow
 [BINP52_CNA_Framework](https://github.com/IngridHLab/BINP52_CNA_Framework), a pipeline to generate copy number profiles and detect copy number signatures from shallow whole genome sequening (sWGS) samples.
 
