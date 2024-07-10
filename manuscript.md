@@ -107,3 +107,6 @@ To apply random forest modeling to generate a prediction or classification model
 #' Generate and validate randomforest model on merged sample_by_component (163 x 36) matrix of HGSC and benign.
 Rscript Tools/RandomForest/Randomforest_CV_CerCNsig_filt.R
 ```
+#### 6. Visualization of signature cosine similarity in the [BINP52_CNA_Framework](https://github.com/IngridHLab/BINP52_CNA_Framework)
+In order to compare 
+[Other_scripts](https://github.com/IngridHLab/BINP52_CNA_Framework/tree/main/Other_scripts)
