@@ -33,7 +33,7 @@ The version of tools and packages to be used will be specified in each step (see
 
 ### Operation guide
 
-#### 1. Workflow *Part I Solutions* in [BINP52_CNA_Framework](https://github.com/IngridHLab/BINP52_CNA_Framework)
+#### 1. Workflow *Part I Solutions* in [BINP52_CNA_Framework](https://github.com/IngridHLab/BINP52_CNA_Framework/workflow)
 ```
 # activate the conda environment installing snakemake
 conda activate snakemake
@@ -42,7 +42,7 @@ cd <path to the downloaded github repository>
 # run the pipeline, for example, 30 threads
 snakemake --use-conda --configfile config/config.yaml --cores 30 --snakefile workflow/Snakefile_solution.smk
 ```
-#### 2. Workflow *Part II Signatures* in [BINP52_CNA_Framework](https://github.com/IngridHLab/BINP52_CNA_Framework)
+#### 2. Workflow *Part II Signatures* in [BINP52_CNA_Framework](https://github.com/IngridHLab/BINP52_CNA_Framework/workflow)
 Note: this step works for HGSC CN signatures as well as pan-cancer CIN signatures, but not includes the panConusig signatures.
 ```
 # activate the conda environment installing snakemake
@@ -52,7 +52,7 @@ cd <path to the downloaded github repository>
 # run the pipeline, at least 30 threads is suggested
 snakemake --use-conda --configfile config/config.yaml --cores 30 --snakefile workflow/Snakefile_CNsig.smk
 ```
-#### 3. Workflow *Part III panConusig* in [BINP52_CNA_Framework](https://github.com/IngridHLab/BINP52_CNA_Framework)
+#### 3. Workflow *Part III panConusig* in [BINP52_CNA_Framework](https://github.com/IngridHLab/BINP52_CNA_Framework/workflow)
 Note: for panConusig, it requires "normal-tumor" pair, the sample sheet is different from other signatures (see example `config/sample_pair_3.tsv`). Furthermore, it starts again from the BAM files to generate allele-specific copy number profiles which are completely different from the other two signatures, so it is good to run separately. Besides, it would be better to run in local conda environment instead of within the Snakemake pipeline to aviod dependency conflicts (such as Java) as well as pathway errors of reference files.  
 Please see suggestion on setting up the environment in [section 3.3](https://github.com/IngridHLab/BINP52_CNA_Framework/blob/main/README.md).
 ```
