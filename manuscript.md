@@ -68,7 +68,7 @@ Rscript workflow/scripts/panConusig_pair_local_1.R
 Rscript workflow/scripts/panConusig_pair_local_2.R
 Rscript workflow/scripts/panConusig_pair_local_3.R
 ```
-#### 4. Workflow *Part VI [CerCNsig](https://github.com/IngridHLab/CerCNsig)* 
+#### 4. Workflow *Part VI [CerCNsig](https://github.com/IngridHLab/CerCNsig/tree/main/Tools/CNsignatures)* 
 The [CerCNsig_filt](https://github.com/NyKepler/CerCNsig/tree/main/Tools/CNsignatures) version 2024 based on the absolution copy number profiles of HGSC Cervical samples generated from the https://github.com/IngridHLab/BINP52_CNA_Framework pipeline. Cervical samples were selected based on their HGSC CN signatures in Macintyre et al. 2018 https://github.com/markowetzlab/CNsignatures: samples with similiarity more than the first three signatures (S1-S3). Those cervical samples were considered to be CNA enriched instead of filtering the cervical samples using the cellularity from ACE/Rascal/ichorCNA estimation and mauanlly inspection which could be not completely accurate.
 
 ```
@@ -99,4 +99,11 @@ Rscript Tools/CNsignatures/Plot_Signature_Cosine_Comparison.R
 
 #' Defining the CerCN signatures by comparing the component weights of each signature to the HGSC CNsignatures: a histogram containing the relative weighting of each of the components, colour coded as the feature distribution.
 Rscript Tools/CNsignatures/Plot_Signature_Component_weights.R
+```
+#### 5. Workflow *Part V [RandomForest](https://github.com/IngridHLab/CerCNsig/tree/main/Tools/RandomForest) classification model*
+To apply random forest modeling to generate a prediction or classification model on cervical samples, we first filter away noisy cervical samples based on QDNAseq CN profile and the differences between expected standard deviation (Eσ) and measured standard deviation, and then applied all 36 components from 163 selected cervical samples from both HGSC and benign patients in the model.
+
+```{bash randomforest k-fold validation}
+#' Generate and validate randomforest model on merged sample_by_component (163 x 36) matrix of HGSC and benign.
+Rscript Tools/RandomForest/Randomforest_CV_CerCNsig_filt.R
 ```
