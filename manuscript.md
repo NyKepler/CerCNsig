@@ -32,7 +32,8 @@ The version of tools and packages to be used will be specified in each step (see
 ![Figure_2_240705](https://github.com/NyKepler/CerCNsig/assets/111468388/28e80dea-300a-476a-bb3b-7b96a26514aa)
 
 ### Operation guide
-#### 1. Workflow *Part I Solutions* 
+
+#### 1. Workflow *Part I Solutions* [BINP52_CNA_Framework](https://github.com/IngridHLab/BINP52_CNA_Framework)
 ```
 # activate the conda environment installing snakemake
 conda activate snakemake
@@ -41,7 +42,7 @@ cd <path to the downloaded github repository>
 # run the pipeline, for example, 30 threads
 snakemake --use-conda --configfile config/config.yaml --cores 30 --snakefile workflow/Snakefile_solution.smk
 ```
-#### 2. Workflow *Part II Signatures* 
+#### 2. Workflow *Part II Signatures* [BINP52_CNA_Framework](https://github.com/IngridHLab/BINP52_CNA_Framework)
 Note: this step works for HGSC CN signatures as well as pan-cancer CIN signatures, but not includes the panConusig signatures.
 ```
 # activate the conda environment installing snakemake
@@ -51,9 +52,9 @@ cd <path to the downloaded github repository>
 # run the pipeline, at least 30 threads is suggested
 snakemake --use-conda --configfile config/config.yaml --cores 30 --snakefile workflow/Snakefile_CNsig.smk
 ```
-#### 3. Workflow *Part III panConusig* 
+#### 3. Workflow *Part III panConusig* [BINP52_CNA_Framework](https://github.com/IngridHLab/BINP52_CNA_Framework)
 Note: for panConusig, it requires "normal-tumor" pair, the sample sheet is different from other signatures (see example `config/sample_pair_3.tsv`). Furthermore, it starts again from the BAM files to generate allele-specific copy number profiles which are completely different from the other two signatures, so it is good to run separately. Besides, it would be better to run in local conda environment instead of within the Snakemake pipeline to aviod dependency conflicts (such as Java) as well as pathway errors of reference files.  
-Please see suggestion on setting up the environment in section 3.3.
+Please see suggestion on setting up the environment in [section 3.3](https://github.com/IngridHLab/BINP52_CNA_Framework/blob/main/README.md).
 ```
 # Firstly, we need to add our local true working directory in the impute reference files
 cat resources/battenberg/battenberg_impute_v3/impute_info00.txt | sed 's#<path_to_impute_reference_files>#resources/battenberg/battenberg_impute_v3#g' > resources/battenberg/battenberg_impute_v3/impute_info.txt
@@ -67,7 +68,7 @@ Rscript workflow/scripts/panConusig_pair_local_1.R
 Rscript workflow/scripts/panConusig_pair_local_2.R
 Rscript workflow/scripts/panConusig_pair_local_3.R
 ```
-#### 4. Workflow *Part VI CerCNsig*
+#### 4. Workflow *Part VI CerCNsig* [CerCNsig](https://github.com/IngridHLab/CerCNsig)
 The [CerCNsig_filt](https://github.com/NyKepler/CerCNsig/tree/main/Tools/CNsignatures) version 2024 based on the absolution copy number profiles of HGSC Cervical samples generated from the https://github.com/IngridHLab/BINP52_CNA_Framework pipeline. Cervical samples were selected based on their HGSC CN signatures in Macintyre et al. 2018 https://github.com/markowetzlab/CNsignatures: samples with similiarity more than the first three signatures (S1-S3). Those cervical samples were considered to be CNA enriched instead of filtering the cervical samples using the cellularity from ACE/Rascal/ichorCNA estimation and mauanlly inspection which could be not completely accurate.
 
 ```
